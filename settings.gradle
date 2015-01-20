@@ -1,0 +1,8 @@
+include ":api", ":common", ":app"
+
+// Rename each child project to its path: Foo becomes FeatureA-Foo or FeatureB-Foo, depending on the Foo.
+rootProject.children.each { p ->
+        p.children.each { module ->
+                module.name = p.name + '-' + module.name
+        }
+}

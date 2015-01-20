@@ -1,0 +1,14 @@
+allprojects
+{
+	// Put instructions for all projects	
+	// task hello << { task -> println "I'm $task.project.name" }
+}
+
+/* 
+Project specific stuff e.g. project(':SUBPRJNAME')
+project(':api') {
+}
+*/
+
+/* Default gradle command will list all tasks available */
+defaultTasks 'tasks'

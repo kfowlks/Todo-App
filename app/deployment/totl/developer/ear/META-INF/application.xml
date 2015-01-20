@@ -1,0 +1,14 @@
+<application>
+	<display-name>Application Description</display-name>
+	<module>
+		<web>
+			<!-- Edit Me: Change the WAR name below -->
+			<web-uri>dashweb-dash.war</web-uri>
+			<context-root>/dash</context-root>
+		</web>
+	</module>
+	
+	<module>
+		<ejb>pollme-ejb3.jar</ejb>
+	</module>
+</application>

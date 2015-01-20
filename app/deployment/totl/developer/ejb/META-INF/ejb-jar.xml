@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd"
+         version="3.0">
+
+<!--
+   Example: EJB3 Parameters injection
+   
+   Description: This sample excerpt shows how to externally define parameters to be injected into your ejb3 service bean at deployment.
+       
+   Java Code: Example
+    
+   @Resource(name="ftu_provider_url") 
+   private String ftu_provider_url;
+    
+   @Resource(name="ftu_app_id") 
+   private String ftu_appID;
+       
+       
+   <enterprise-beans>
+	   <session>
+		    <ejb-name>FormService</ejb-name>
+			<ejb-class>edu.msu.ais.d4015.ejb.service.FormService</ejb-class>
+			<env-entry>
+				<env-entry-name>ftu_provider_url</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>jnp://ftudev1.ais.msu.edu:1099</env-entry-value>
+			</env-entry>
+			<env-entry>
+				<env-entry-name>ftu_app_id</env-entry-name>
+				<env-entry-type>java.lang.String</env-entry-type>
+				<env-entry-value>App/BorderChangeForm</env-entry-value>
+			</env-entry>
+	</enterprise-beans>   
+    -->
+
+</ejb-jar>
