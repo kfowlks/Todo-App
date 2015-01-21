@@ -12,9 +12,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import net.p2pmag.totl.domain.Organization;
-import net.p2pmag.totl.services.ServiceExample;
-import net.p2pmag.totl.services.ServiceExampleImpl;
+import net.p2pmag.totl.domain.TodoList;
+import net.p2pmag.totl.services.TodoService;
+import net.p2pmag.totl.services.TodoServiceImpl;
 import net.p2pmag.totl.web.common.AbstractActionBean;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -39,7 +39,7 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
 	protected static final String DEFAULT = "/WEB-INF/protected_jsps/default.jsp";
 	
 	@SpringBean
-	private transient ServiceExample serviceExample;
+	private transient TodoService todoService;
 	
     /**
      * Display default.jsp.
@@ -53,32 +53,28 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     	
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	
-    	if( serviceExample != null ) 
+    	
+    	List<TodoList> list = todoService.getAllTodoList();    	
+    	logger.info( "Todo List Size{} ", list.size());
+    	
+    	todoService.addTodoListPartial("IBM " + System.currentTimeMillis() );
+    	
+    	logger.info( "Todo List Size{} ", list.size());
+    	
+    	
+    	for (TodoList todo: list)
     	{
-    	
-    	List<Organization> list = serviceExample.getOrganizationList();    	
-    	logger.info( "Org List Size{} ", list.size());
-    	
-    	serviceExample.addOrganization("IBM " + System.currentTimeMillis() );
-    	
-    	logger.info( "Org List Size{} ", list.size());
-    	
-    	
-    	for (Organization org: list)
-    	{
-    		logger.info( "Org ID {} / Name {} ", org.getId(), org.getName());
+    		logger.info( "Todo ID {} / Name {} ", todo.getId(), todo.getTitle() );
     	}
     	
-    	Organization myOrg = serviceExample.getOrganization((long) 5);
+    	//TodoList myOrg = todoService.getOrganization((long) 5);
     	
-    	logger.info( "My Org " +  myOrg );
+    	//logger.info( "My Org " +  myOrg );
     	
-    	}
-    	else
-    	{
-    		logger.info( " No Service");
-    	}
+    	
+    
     	logger.info( "In Event {} ", this.getContext().getEventName());
+    	
 
     	return new ForwardResolution( "/WEB-INF/protected_jsps/default.jsp" );
     }

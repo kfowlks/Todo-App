@@ -28,7 +28,7 @@ targetCompatibility = '1.7'
 defaultTasks 'clean', 'war'
 
 flyway {
-    url = 'jdbc:hsqldb:file:/home3/TurnOffTheLights/hsqldb/totl.db'
+    url = 'jdbc:hsqldb:file:/home3/totl/hsqldb/totl.db'
     user = 'sa'
 }
 
