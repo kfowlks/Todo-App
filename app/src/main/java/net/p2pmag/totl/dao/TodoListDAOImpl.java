@@ -19,28 +19,17 @@ public class TodoListDAOImpl extends GenericDAO<TodoList, Integer> implements To
 
 	@Autowired
 	private Sql2o sql2o;	 
-
-	@Override
-	public List<TodoList> getAllOrgs() {
-		
-		String sql = "SELECT id, name FROM TodoList";
-
-		try(Connection con = sql2o.open()) {
-			 return con.createQuery(sql).executeAndFetch(TodoList.class);
-		}
-	}
-
-	@Override
+	
 	public List<TodoList> findAll() {
 		try(Connection con = sql2o.open()) {
-			 return con.createQuery("SELECT id, name FROM TodoList").executeAndFetch(TodoList.class);
+			 return con.createQuery("SELECT id, title, description, completeby, createdon FROM TodoLists").executeAndFetch(TodoList.class);
 		}
 	}
 
 	@Override
 	public void save(TodoList domain) {
 
-		String sql = "INSERT INTO TodoList(id, name) values (:id, :name )";
+		String sql = "INSERT INTO TodoLists(title, description, completeby, createdon) values (:title, description = :description, completeby = :completeby, createdon = :createdon )";
 		
 		try (Connection con = sql2o.open()) {
 		    con.createQuery(sql).bind(domain).executeUpdate().getKey();;
@@ -50,7 +39,7 @@ public class TodoListDAOImpl extends GenericDAO<TodoList, Integer> implements To
 	@Override
 	public void update(TodoList domain) {
 		
-		String sql = "UPDATE TodoList SET name = :name WHERE id = :id";
+		String sql = "UPDATE TodoLists SET title = :title, description = :description, completeby = :completeby, createdon = :createdon WHERE id = :id";
 		
 		try (Connection con = sql2o.open()) {
 		    con.createQuery(sql).bind(domain).executeUpdate();
@@ -60,7 +49,7 @@ public class TodoListDAOImpl extends GenericDAO<TodoList, Integer> implements To
 	@Override
 	public void delete(TodoList domain) {
 		
-		String sql = "DELETE FROM TodoList WHERE id = :id";
+		String sql = "DELETE FROM TodoLists WHERE id = :id";
 		
 		try (Connection con = sql2o.open()) {
 		    con.createQuery(sql).bind(domain).executeUpdate().getKey();;
@@ -70,7 +59,7 @@ public class TodoListDAOImpl extends GenericDAO<TodoList, Integer> implements To
 	@Override
 	public TodoList findById(Integer id) {
 		try(Connection con = sql2o.open()) {
-			 return con.createQuery("SELECT id, name FROM TodoList WHERE id = :IdParm").
+			 return con.createQuery("SELECT id, title, description, completeby, createdon FROM TodoLists WHERE id = :IdParm").
 					 addParameter("IdParm", id).executeAndFetchFirst(TodoList.class);
 		}
 	}
