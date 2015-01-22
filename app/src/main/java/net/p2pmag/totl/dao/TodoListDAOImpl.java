@@ -22,7 +22,7 @@ public class TodoListDAOImpl extends GenericDAO<TodoList, Integer> implements To
 	
 	public List<TodoList> findAll() {
 		try(Connection con = sql2o.open()) {
-			 return con.createQuery("SELECT id, title, description, completeby, createdon FROM TodoLists").executeAndFetch(TodoList.class);
+			 return con.createQuery("SELECT id, title, description, completeby, createdon FROM public.TodoLists").executeAndFetch(TodoList.class);
 		}
 	}
 

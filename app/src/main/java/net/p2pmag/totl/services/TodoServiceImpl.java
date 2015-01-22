@@ -20,9 +20,8 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public List<TodoList> getAllTodoList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TodoList> getAllTodoList() {		
+		return todoListDAO.findAll();
 	}
 
 	@Override

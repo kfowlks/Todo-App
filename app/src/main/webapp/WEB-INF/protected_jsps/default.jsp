@@ -17,7 +17,12 @@
           <li><a href="#">Contact</a></li>
         </ul>
       </div>
-     <h3 class="muted">Welcome to turn off the lights!</h3>	      
+     <h3 class="muted">Welcome to turn off the lights!</h3>
+     
+     <!--<c:forEach items="${loopableObject}" var="theObject" varStatus="theCount">
+     
+    </c:forEach>-->
+     
     </stripes:layout-component>
     
     <stripes:layout-component name="contents">
