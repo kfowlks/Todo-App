@@ -43,7 +43,7 @@
     <c:forEach items="${actionBean.lists}" var="item" varStatus="loop">
         <tr>
      		<td>${item.id}</td>
-     		<td><stripes:link addSourcePage="true" beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" >
+     		<td><stripes:link addSourcePage="true" beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="doPage" >
      			<stripes:param name="list.id">${item.id}</stripes:param>
      			${item.name}</stripes:link></td>
      	</tr>

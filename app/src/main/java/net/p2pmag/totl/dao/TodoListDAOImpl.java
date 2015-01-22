@@ -64,8 +64,11 @@ public class TodoListDAOImpl extends GenericDAO<TodoList, Integer> implements To
 	@Override
 	public TodoList findById(Integer id) {
 		try(Connection con = sql2o.open()) {
-			 return con.createQuery("SELECT id, name, description, completeby FROM TodoLists WHERE id = :id").addParameter("id", id).
+			TodoList obj =  con.createQuery("SELECT id, name, description, completeby FROM TodoLists WHERE id = :id").addParameter("id", id).
 					 executeAndFetchFirst(TodoList.class);
+			 logger.info("obj: {}", id );
+			 logger.info("obj: {}", obj );
+			 return obj;
 		}
 	}
 	

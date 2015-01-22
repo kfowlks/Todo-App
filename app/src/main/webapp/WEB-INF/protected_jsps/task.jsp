@@ -5,7 +5,7 @@
 
 
 
-
+<stripes:useActionBean id="actionBean" beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" />
 <stripes:layout-render name="/WEB-INF/protected_jsps/layout/_template.jsp" pageTitle="TurnOffTheLights" nav="default">
     
     <stripes:layout-component name="html_head">
@@ -22,7 +22,7 @@
         </ul>
       </div>
       -->
-     <h3 class="muted">Editing Todo List ${list.name}</h3>
+     <h3 class="muted">Editing Todo List ${actionBean.list.name}</h3>
      
      <!-- -->
      

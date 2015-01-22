@@ -7,8 +7,13 @@
  */
 package net.p2pmag.totl.web.extension;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 
 import net.sourceforge.stripes.controller.NameBasedActionResolver;
 
@@ -96,4 +101,39 @@ public class ActionResolver extends NameBasedActionResolver
 
         return builder.toString();
     }
+    
+    
+    public String getBuildNumberAndDate()
+    {
+        Enumeration<URL> resources;
+        String buildDate   = null;
+        String buildNumber = null;
+        
+		try 
+		{
+			resources = getClass().getClassLoader().getResources("META-INF/MANIFEST.MF");
+        
+	        while (resources.hasMoreElements()) 
+	        {
+	          
+	            Manifest manifest = new Manifest(resources.nextElement().openStream());
+	            
+	            Attributes attributes = manifest.getMainAttributes();
+	
+	            buildNumber = attributes.getValue("Build-Number");	            
+	            buildDate = attributes.getValue("Built-Date");
+
+	            if ( buildNumber != null ) 
+	            {	            
+	            	break;
+	            }
+	        }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "<b>Build Number:</b> " + buildNumber + " <b>Build Date:</b> " + buildDate;    	
+    }
+    
 }
