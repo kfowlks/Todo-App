@@ -22,7 +22,7 @@
         </ul>
       </div>
       -->
-     <h3 class="muted">Todo Example</h3>
+     <h3 class="muted">Editing Todo List ${list.name}</h3>
      
      <!-- -->
      
@@ -30,25 +30,6 @@
     
     <stripes:layout-component name="contents">
     
-    <stripes:form beanclass="net.p2pmag.totl.web.controller.DefaultActionBean" focus="">
-    	<stripes:submit name="AddList" value="AddList" >Add New Todo List</stripes:submit>    	
-    	<stripes:text   name="list.name"></stripes:text>
-    </stripes:form>
-     <br />
-     
-    <table class="display">
-    <tr>
-        <th>Name</th>
-    </tr>   
-    <c:forEach items="${actionBean.lists}" var="item" varStatus="loop">
-        <tr>
-     		<td>${item.id}</td>
-     		<td><stripes:link addSourcePage="true" beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" >
-     			<stripes:param name="list.id">${item.id}</stripes:param>
-     			${item.name}</stripes:link></td>
-     	</tr>
-    </c:forEach>
-    </table>
     <!-- 
 	  <div class="jumbotron">
         <h1>Super awesome marketing speak!</h1>

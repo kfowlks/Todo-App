@@ -5,12 +5,18 @@ import java.util.List;
 import net.p2pmag.totl.dao.TodoListDAO;
 import net.p2pmag.totl.domain.TodoList;
 import net.p2pmag.totl.domain.TodoTask;
+import net.p2pmag.totl.web.controller.DefaultActionBean;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("todoService")
 public class TodoServiceImpl implements TodoService {
+	
+	
+	private final static Logger logger = LoggerFactory.getLogger( TodoServiceImpl.class );
 	
 	@Autowired
     private TodoListDAO todoListDAO;
@@ -31,21 +37,23 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public TodoList getTodoList(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public TodoList getTodoList(Integer id) {
+		
+		TodoList tl;
+		tl = todoListDAO.findById(id);
+		logger.debug("TodoList: " + tl );
+		
+		return tl;		
 	}
 
 	@Override
-	public void addTodoListPartial(String name) {
-		// TODO Auto-generated method stub
-		
+	public void addTodoListPartial(String name, String description) {		
+		todoListDAO.save( new TodoList( name, description ) );
 	}
 
 	@Override
 	public void addTodoList(TodoList list) {
-		// TODO Auto-generated method stub
-		
+		todoListDAO.save( list );		
 	}
 
 	@Override

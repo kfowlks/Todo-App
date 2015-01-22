@@ -9,12 +9,23 @@ import java.util.List;
 public class TodoList implements Serializable {
 	
 	private Integer id;
-	private String title;
+	private String name;
 	private String description;
 	private Timestamp completeby;
-	private Timestamp createdon;
 	
 	private List<TodoTask> todoTasks = Collections.synchronizedList(new LinkedList<TodoTask>());
+	
+	
+	public TodoList() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public TodoList(String name, String description) {
+		super();
+		this.name = name;
+		this.description = description;
+	}
 	
 	public Integer getId() {
 		return id;
@@ -22,11 +33,13 @@ public class TodoList implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getTitle() {
-		return title;
+
+	
+	public String getName() {
+		return name;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getDescription() {
 		return description;
@@ -40,13 +53,7 @@ public class TodoList implements Serializable {
 	public void setCompleteby(Timestamp completeby) {
 		this.completeby = completeby;
 	}
-	public Timestamp getCreatedon() {
-		return createdon;
-	}
-	public void setCreatedon(Timestamp createdon) {
-		this.createdon = createdon;
-	}
-	
+
 	public List<TodoTask> getTodoTasks() {
 		return todoTasks;
 	}
@@ -56,8 +63,8 @@ public class TodoList implements Serializable {
 	@Override
 	public String toString() {
 		return String
-				.format("TodoList [id=%s, title=%s, description=%s, completeby=%s, createdon=%s]",
-						id, title, description, completeby, createdon);
+				.format("TodoList [id=%s, name=%s, description=%s, completeby=%s]",
+						id, name, description, completeby);
 	} 
 
 }

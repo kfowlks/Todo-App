@@ -13,13 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import net.p2pmag.totl.domain.TodoList;
+import net.p2pmag.totl.domain.TodoTask;
 import net.p2pmag.totl.services.TodoService;
 import net.p2pmag.totl.services.TodoServiceImpl;
 import net.p2pmag.totl.web.common.AbstractActionBean;
 import net.sourceforge.stripes.action.ActionBean;
+import net.sourceforge.stripes.action.After;
+import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
 import org.slf4j.Logger;
@@ -27,19 +31,20 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * Default action for the application.
+ * Default Task action for the application.
  *
  * @author   <a href="mailto:kfowlks@gmail.com">Kevin Fowlks</a>
  * @version  1.0
  */
-public class DefaultActionBean extends AbstractActionBean implements ActionBean
+public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
 {
 	
-	private final static Logger logger = LoggerFactory.getLogger( DefaultActionBean.class );
-	protected static final String DEFAULT = "/WEB-INF/protected_jsps/default.jsp";
+	private final static Logger logger = LoggerFactory.getLogger( TodoTaskActionBean.class );
+	protected static final String PAGE = "/WEB-INF/protected_jsps/task.jsp";
 	
 	private TodoList list;
-	private List<TodoList> lists;
+	private TodoTask task;
+	
 
 	public TodoList getList() {
 		return list;
@@ -50,16 +55,20 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
 		this.list = list;
 	}
 
-
-	public List<TodoList> getLists() {
-		return lists;
+	public TodoTask getTask() {
+		return task;
 	}
 
 
-	public void setLists(List<TodoList> lists) {
-		this.lists = lists;
+	public void setTask(TodoTask task) {
+		this.task = task;
 	}
 
+
+	@Before(stages = LifecycleStage.BindingAndValidation)
+	public void rehydrate() {
+	    this.list = todoService.getTodoList( Integer.getInteger( this.getContext().getRequest().getParameter("list.id")));
+	}
 
 	@SpringBean
 	private transient TodoService todoService;
@@ -69,41 +78,26 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
      *
      * @return  the resolution
      */
-    @DefaultHandler public Resolution welcome()
+    @DefaultHandler public Resolution doPage()
     {
     	HttpServletRequest    request = this.getContext().getRequest();
     	HttpSession session = request.getSession(false);
     	
     	logger.info( "In Event {} ", this.getContext().getEventName());
+    	logger.info( "Todo List {} ", list );
     	
-    	
-    	lists = todoService.getAllTodoList();    	
-    	logger.info( "Todo List Size{} ", lists.size());
-    	
-    	//todoService.addTodoListPartial("IBM " + System.currentTimeMillis(), "Again!, Again!" );
-    	
-    	logger.info( "Todo List Size{} ", lists.size());
-    	
-    	
-    	for (TodoList todos: lists)
-    	{
-    		logger.info( "Todo ID {} / Name {} ", todos.getId(), todos.getName() );
-    	}
-    
-    	logger.info( "In Event {} ", this.getContext().getEventName());
-    	
-
-    	return new ForwardResolution( "/WEB-INF/protected_jsps/default.jsp" );
+    	return new ForwardResolution( PAGE );
     }
     
     
-    public Resolution AddList()
+    public Resolution AddTask()
     {
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	logger.info( "Todo List {} ", list );
-    	todoService.addTodoList( list );
     	
-    	return new ForwardResolution( "/WEB-INF/protected_jsps/default.jsp" );
+    	todoService.addTodoTask(task);
+    	
+    	return new ForwardResolution( PAGE ).addParameter("id", list.getId());
     }
        
 }

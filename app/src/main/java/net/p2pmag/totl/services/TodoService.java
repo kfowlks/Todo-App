@@ -10,9 +10,9 @@ public interface TodoService {
 	public List<TodoList> getAllTodoList();
 	public List<TodoList> searchTodoList();
 	
-	public TodoList getTodoList(Long id);
+	public TodoList getTodoList(Integer integer);
 	
-	public void addTodoListPartial( String name );
+	public void addTodoListPartial( String name, String description );
 	public void addTodoList( TodoList list );
 	
 	public void addTodoTask( TodoTask task );
