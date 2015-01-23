@@ -36,19 +36,18 @@
     </stripes:form>
      <br />
      
-    <table class="display">
-    <tr>
-        <th>Name</th>
-    </tr>   
+    <ul>
     <c:forEach items="${actionBean.lists}" var="item" varStatus="loop">
-        <tr>
-     		<td>${item.id}</td>
-     		<td><stripes:link addSourcePage="true" beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="doPage" >
+        <li>
+        <p>
+     		${item.id}
+     		<stripes:link addSourcePage="true" beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="doPage" >
      			<stripes:param name="list.id">${item.id}</stripes:param>
-     			${item.name}</stripes:link></td>
-     	</tr>
+     			${item.name}</stripes:link>
+     		</p>
+     	</li>
     </c:forEach>
-    </table>
+    </ul>
     <!-- 
 	  <div class="jumbotron">
         <h1>Super awesome marketing speak!</h1>

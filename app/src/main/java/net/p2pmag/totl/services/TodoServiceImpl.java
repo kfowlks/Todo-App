@@ -3,6 +3,7 @@ package net.p2pmag.totl.services;
 import java.util.List;
 
 import net.p2pmag.totl.dao.TodoListDAO;
+import net.p2pmag.totl.dao.TodoTaskDAO;
 import net.p2pmag.totl.domain.TodoList;
 import net.p2pmag.totl.domain.TodoTask;
 import net.p2pmag.totl.web.controller.DefaultActionBean;
@@ -20,6 +21,10 @@ public class TodoServiceImpl implements TodoService {
 	
 	@Autowired
     private TodoListDAO todoListDAO;
+
+	@Autowired
+    private TodoTaskDAO todoTaskDAO;
+	
 	
 	public TodoServiceImpl() {
 		super(); 
@@ -42,7 +47,7 @@ public class TodoServiceImpl implements TodoService {
 		TodoList tl;
 		tl = todoListDAO.findById(id);
 		logger.debug("TodoList: " + tl );
-		
+		tl.setTodoTasks(  todoTaskDAO.findAll() );		
 		return tl;		
 	}
 
@@ -59,13 +64,18 @@ public class TodoServiceImpl implements TodoService {
 	@Override
 	public void addTodoTask(TodoTask task) {
 		// TODO Auto-generated method stub
-		
+		todoTaskDAO.save(task);
 	}
 
 	@Override
-	public void addTodoTaskPartial(String description) {
-		// TODO Auto-generated method stub
+	public void addTodoTaskPartial(TodoList list, String description) {
+
+		TodoTask obj = new TodoTask();
 		
+		obj.setList_id(list.getId());
+		obj.setDescription(description);
+		
+		todoTaskDAO.save(obj);		
 	}
 
 	@Override

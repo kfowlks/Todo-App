@@ -30,6 +30,21 @@
     
     <stripes:layout-component name="contents">
     
+     <stripes:form beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" focus="">
+    	<stripes:submit name="addTask" value="addTask" >Add Task</stripes:submit>    	
+    	<stripes:text size="100"  name="task.description"></stripes:text>
+    	<stripes:hidden name="list.id" value="${actionBean.list.id}"></stripes:hidden>
+    	
+    </stripes:form>
+    
+     <ul>
+	    <c:forEach items="${actionBean.list.todoTasks}" var="task" varStatus="loop">
+	        <li>
+		        <p>${task.id}  - ${task.description}</p>
+	     	</li>
+	    </c:forEach>
+    </ul>
+    
     <!-- 
 	  <div class="jumbotron">
         <h1>Super awesome marketing speak!</h1>

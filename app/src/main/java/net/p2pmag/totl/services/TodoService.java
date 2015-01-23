@@ -16,7 +16,7 @@ public interface TodoService {
 	public void addTodoList( TodoList list );
 	
 	public void addTodoTask( TodoTask task );
-	public void addTodoTaskPartial( String description );
+	public void addTodoTaskPartial( TodoList list, String description );
 	
 	public void updateTodoTask( TodoTask task );
 	public void updateTodoList( TodoList list  );

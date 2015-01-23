@@ -88,24 +88,24 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     	
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	logger.info( "Todo List {} ", list );
-
 		
 	    this.list = todoService.getTodoList( list.getId() );
 	    
 	    logger.info("id: {}", list.getId() );
 	    logger.info("rehydrate: {}", list);
-
     	
     	return new ForwardResolution( PAGE );
     }
     
     
-    public Resolution AddTask()
+    public Resolution addTask()
     {
+    	
+    	 this.list = todoService.getTodoList( list.getId() );
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	logger.info( "Todo List {} ", list );
     	
-    	todoService.addTodoTask(task);
+    	todoService.addTodoTaskPartial( list, task.getDescription() );
     	
     	return new ForwardResolution( PAGE ).addParameter("id", list.getId());
     }
