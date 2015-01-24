@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("todoService")
+@Service("TodoService")
 public class TodoServiceImpl implements TodoService {
 	
 	
@@ -46,8 +46,8 @@ public class TodoServiceImpl implements TodoService {
 		
 		TodoList tl;
 		tl = todoListDAO.findById(id);
-		logger.debug("TodoList: " + tl );
-		tl.setTodoTasks(  todoTaskDAO.findAll() );		
+		logger.info("TodoList: " + tl );
+		tl.setTodoTasks( todoTaskDAO.findAllByList( tl.getId() ) );		
 		return tl;		
 	}
 

@@ -32,6 +32,13 @@ public class TodoTaskDAOImpl extends GenericDAO<TodoTask, Integer> implements To
 		}
 	}
 
+	public List<TodoTask> findAllByList( Integer list_id ) {
+		try(Connection con = sql2o.open()) {
+			 return con.createQuery("SELECT id, list_id, description, createdon, completed FROM TodoTasks WHERE list_id = :list_id").addParameter("list_id", list_id).executeAndFetch(TodoTask.class);
+		}
+	}
+	
+	
 	@Override
 	public void save(TodoTask domain) {
 		

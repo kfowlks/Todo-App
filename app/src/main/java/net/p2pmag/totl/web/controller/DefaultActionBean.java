@@ -69,7 +69,7 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
      *
      * @return  the resolution
      */
-    @DefaultHandler public Resolution welcome()
+    @DefaultHandler public Resolution index()
     {
     	HttpServletRequest    request = this.getContext().getRequest();
     	HttpSession session = request.getSession(false);

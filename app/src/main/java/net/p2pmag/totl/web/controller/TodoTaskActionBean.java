@@ -63,7 +63,7 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
 	public void setTask(TodoTask task) {
 		this.task = task;
 	}
-
+/*
 	@Before(stages = LifecycleStage.BindingAndValidation)
 	public void rehydrate() {
 		Integer id = Integer.getInteger( this.getContext().getRequest().getParameter("id"));
@@ -71,7 +71,7 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
 	    logger.info("id: {}", id);
 	    logger.info("rehydrate: {}", list);
 	}
-	
+	*/
 
 	@SpringBean
 	private transient TodoService todoService;
@@ -81,18 +81,18 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
      *
      * @return  the resolution
      */
-    @DefaultHandler public Resolution doPage()
+    @DefaultHandler public Resolution index()
     {
     	HttpServletRequest    request = this.getContext().getRequest();
     	HttpSession session = request.getSession(false);
     	
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	logger.info( "Todo List {} ", list );
-		
+    	logger.info("id: {}", list.getId() );
+	    
 	    this.list = todoService.getTodoList( list.getId() );
 	    
-	    logger.info("id: {}", list.getId() );
-	    logger.info("rehydrate: {}", list);
+	    
     	
     	return new ForwardResolution( PAGE );
     }
