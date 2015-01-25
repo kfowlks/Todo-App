@@ -65,10 +65,29 @@ public class TodoTaskDAOImpl extends GenericDAO<TodoTask, Integer> implements To
 		String sql = "DELETE FROM TodoTasks WHERE id = :id";
 		
 		try (Connection con = sql2o.open()) {
-		    con.createQuery(sql).bind(domain).executeUpdate().getKey();;
+			con.createQuery(sql).addParameter("id", domain.getId()).executeUpdate();
+			int row = con.getResult();
+			logger.info("obj/row: {}/{}", domain, row );
+		    
+		    
 		}		
 	}
 
+	@Override
+	public void delete(Integer id) {
+		
+		String sql = "DELETE FROM TodoTasks WHERE id = :id";
+		
+		try (Connection con = sql2o.open()) {
+			con.createQuery(sql).addParameter("id", id).executeUpdate();
+			int row = con.getResult();
+			logger.info("id/row: {}/{}", id, row );
+		    
+		    
+		}		
+	}
+	
+	
 	@Override
 	public TodoTask findById(Integer id) {
 		try(Connection con = sql2o.open()) {

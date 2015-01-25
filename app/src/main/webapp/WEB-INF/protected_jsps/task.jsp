@@ -33,14 +33,16 @@
      <stripes:form beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" focus="">
     	<stripes:submit name="addTask" value="addTask" >Add Task</stripes:submit>    	
     	<stripes:text size="100"  name="task.description"></stripes:text>
-    	<stripes:hidden name="list.id" value="${actionBean.list.id}"></stripes:hidden>
-    	
+    	<stripes:hidden name="list.id" value="${actionBean.list.id}"></stripes:hidden>    	
     </stripes:form>
     
      <ul>
 	    <c:forEach items="${actionBean.list.todoTasks}" var="task" varStatus="loop">
 	        <li>
-		        <p>${task.id}  - ${task.description}</p>
+		        ${task.description} <stripes:link  beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="deleteTask" >
+     				<stripes:param name="task.id">${task.id}</stripes:param>
+     				<stripes:param name="list.id">${actionBean.list.id}</stripes:param>  Remove
+     			</stripes:link>
 	     	</li>
 	    </c:forEach>
     </ul>

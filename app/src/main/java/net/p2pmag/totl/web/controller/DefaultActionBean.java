@@ -76,14 +76,12 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     	
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	
-    	
     	lists = todoService.getAllTodoList();    	
     	logger.info( "Todo List Size{} ", lists.size());
     	
     	//todoService.addTodoListPartial("IBM " + System.currentTimeMillis(), "Again!, Again!" );
     	
     	logger.info( "Todo List Size{} ", lists.size());
-    	
     	
     	for (TodoList todos: lists)
     	{
@@ -97,7 +95,7 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     }
     
     
-    public Resolution AddList()
+    public Resolution addList()
     {
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	logger.info( "Todo List {} ", list );

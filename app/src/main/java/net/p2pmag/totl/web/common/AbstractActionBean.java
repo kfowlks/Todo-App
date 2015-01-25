@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
+import net.sourceforge.stripes.action.ErrorResolution;
 import net.sourceforge.stripes.action.SimpleMessage;
 
 import org.slf4j.Logger;
@@ -33,6 +34,8 @@ public abstract class AbstractActionBean implements ActionBean, Serializable
 {
 
     private transient ActionBeanContext context;
+    
+    protected static ErrorResolution TODO = new ErrorResolution(501, "Action not implemented.");
     
     protected void setMessage(String value) 
     {

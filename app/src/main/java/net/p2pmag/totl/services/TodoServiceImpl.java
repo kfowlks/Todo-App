@@ -1,5 +1,6 @@
 package net.p2pmag.totl.services;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import net.p2pmag.totl.dao.TodoListDAO;
@@ -74,6 +75,7 @@ public class TodoServiceImpl implements TodoService {
 		
 		obj.setList_id(list.getId());
 		obj.setDescription(description);
+		obj.setCreatedon( new Timestamp( System.currentTimeMillis() ));
 		
 		todoTaskDAO.save(obj);		
 	}
@@ -92,8 +94,7 @@ public class TodoServiceImpl implements TodoService {
 
 	@Override
 	public void deleteTodoTask(TodoTask task) {
-		// TODO Auto-generated method stub
-		
+		todoTaskDAO.delete(task);
 	}
 
 	@Override
@@ -105,6 +106,8 @@ public class TodoServiceImpl implements TodoService {
 	@Override
 	public void deleteTodoTask(Integer id) {
 		// TODO Auto-generated method stub
+		
+		todoTaskDAO.delete(id);
 		
 	}
 

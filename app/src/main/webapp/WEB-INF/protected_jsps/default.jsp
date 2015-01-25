@@ -31,7 +31,7 @@
     <stripes:layout-component name="contents">
     
     <stripes:form beanclass="net.p2pmag.totl.web.controller.DefaultActionBean" focus="">
-    	<stripes:submit name="AddList" value="AddList" >Add New Todo List</stripes:submit>    	
+    	<stripes:submit name="addList" value="addList" >Add New Todo List</stripes:submit>    	
     	<stripes:text   name="list.name"></stripes:text>
     </stripes:form>
      <br />
@@ -41,7 +41,7 @@
         <li>
         <p>
      		${item.id}
-     		<stripes:link addSourcePage="true" beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="doPage" >
+     		<stripes:link beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="doPage" >
      			<stripes:param name="list.id">${item.id}</stripes:param>
      			${item.name}</stripes:link>
      		</p>

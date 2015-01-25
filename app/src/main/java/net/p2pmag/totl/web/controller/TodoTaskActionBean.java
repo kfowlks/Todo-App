@@ -22,6 +22,7 @@ import net.sourceforge.stripes.action.After;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
@@ -88,7 +89,7 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     	
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	logger.info( "Todo List {} ", list );
-    	logger.info("id: {}", list.getId() );
+//    	logger.info("id: {}", list.getId() );
 	    
 	    this.list = todoService.getTodoList( list.getId() );
 	    
@@ -97,6 +98,17 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     	return new ForwardResolution( PAGE );
     }
     
+    public Resolution deleteTask()
+    {    	
+    	
+    	logger.info( "In Event {} ", this.getContext().getEventName());
+    	logger.info( "Todo List {} ", list );
+    	logger.info( "Todo Task {} ", task );
+    	todoService.deleteTodoTask( task.getId() );
+    	
+    	//return new ForwardResolution( PAGE ).addParameter("id", list.getId());
+    	return new RedirectResolution( TodoTaskActionBean.class, "index").addParameter("list.id", list.getId());
+    }
     
     public Resolution addTask()
     {
@@ -107,7 +119,7 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     	
     	todoService.addTodoTaskPartial( list, task.getDescription() );
     	
-    	return new ForwardResolution( PAGE ).addParameter("id", list.getId());
+    	return index();
     }
        
 }
