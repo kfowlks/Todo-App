@@ -61,6 +61,18 @@ public class TodoListDAOImpl extends GenericDAO<TodoList, Integer> implements To
 		}		
 	}
 
+	public void delete(Integer id) {
+		
+		String sql = "DELETE FROM TodoLists WHERE id = :id";
+		
+		try (Connection con = sql2o.open()) {
+			con.createQuery(sql).addParameter("id", id).executeUpdate();
+			int row = con.getResult();
+			logger.info("id/row: {}/{}", id, row );
+		}		
+	}
+
+	
 	@Override
 	public TodoList findById(Integer id) {
 		try(Connection con = sql2o.open()) {

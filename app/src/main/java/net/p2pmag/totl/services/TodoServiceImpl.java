@@ -114,7 +114,7 @@ public class TodoServiceImpl implements TodoService {
 	@Override
 	public void deleteTodoList(Integer id) {
 		// TODO Auto-generated method stub
-		
+		todoListDAO.delete(id);
 	}
 
 	

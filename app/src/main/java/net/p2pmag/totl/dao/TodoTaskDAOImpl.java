@@ -82,8 +82,6 @@ public class TodoTaskDAOImpl extends GenericDAO<TodoTask, Integer> implements To
 			con.createQuery(sql).addParameter("id", id).executeUpdate();
 			int row = con.getResult();
 			logger.info("id/row: {}/{}", id, row );
-		    
-		    
 		}		
 	}
 	

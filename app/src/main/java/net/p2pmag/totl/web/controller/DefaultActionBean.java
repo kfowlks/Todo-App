@@ -19,6 +19,7 @@ import net.p2pmag.totl.web.common.AbstractActionBean;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
@@ -94,6 +95,13 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     	return new ForwardResolution( "/WEB-INF/protected_jsps/default.jsp" );
     }
     
+    public Resolution deleteTaskList()
+    {    	
+    	logger.info( "Todo List {} ", list );
+    	logger.info( "In Event {} ", this.getContext().getEventName());
+    	todoService.deleteTodoList( list.getId() );    	
+    	return new RedirectResolution( DefaultActionBean.class, "index");
+    }
     
     public Resolution addList()
     {
