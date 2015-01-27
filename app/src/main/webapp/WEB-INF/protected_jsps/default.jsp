@@ -3,9 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
-
-
 <stripes:layout-render name="/WEB-INF/protected_jsps/layout/_template.jsp" pageTitle="TurnOffTheLights" nav="default">
     
     <stripes:layout-component name="html_head">
@@ -23,9 +20,7 @@
       </div>
       -->
      <h3 class="muted">Todo Example</h3>
-     
-     <!-- -->
-     
+    
     </stripes:layout-component>
     
     <stripes:layout-component name="contents">

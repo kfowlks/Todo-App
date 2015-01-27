@@ -46,11 +46,9 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
 	private TodoList list;
 	private TodoTask task;
 	
-
 	public TodoList getList() {
 		return list;
 	}
-
 
 	public void setList(TodoList list) {
 		this.list = list;
@@ -59,7 +57,6 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
 	public TodoTask getTask() {
 		return task;
 	}
-
 
 	public void setTask(TodoTask task) {
 		this.task = task;
@@ -92,8 +89,6 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
 //    	logger.info("id: {}", list.getId() );
 	    
 	    this.list = todoService.getTodoList( list.getId() );
-	    
-	    
     	
     	return new ForwardResolution( PAGE );
     }
@@ -113,7 +108,7 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     public Resolution addTask()
     {
     	
-    	 this.list = todoService.getTodoList( list.getId() );
+    	this.list = todoService.getTodoList( list.getId() );
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	logger.info( "Todo List {} ", list );
     	

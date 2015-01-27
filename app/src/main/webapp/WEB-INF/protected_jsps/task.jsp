@@ -24,8 +24,6 @@
       -->
      <h3 class="muted">Editing Todo List ${actionBean.list.name}</h3>
      
-     <!-- -->
-     
     </stripes:layout-component>
     
     <stripes:layout-component name="contents">
@@ -41,11 +39,13 @@
 	        <li>
 		        ${task.description} <stripes:link  beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="deleteTask" >
      				<stripes:param name="task.id">${task.id}</stripes:param>
-     				<stripes:param name="list.id">${actionBean.list.id}</stripes:param>  Remove
+     				<stripes:param name="list.id">${actionBean.list.id}</stripes:param> Remove
      			</stripes:link>
 	     	</li>
 	    </c:forEach>
     </ul>
+    
+    <stripes:link beanclass="net.p2pmag.totl.web.controller.DefaultActionBean" event="back" >Back</stripes:link>
     
     <!-- 
 	  <div class="jumbotron">
@@ -53,7 +53,7 @@
         <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
         <a class="btn btn-large btn-success" href="#">Sign up today</a>
       </div>
-       -->
+    -->
 	<!--  <img src="${ctx}/UI/site/images/headtorso.jpg" class="half" width="%50" />  -->
     </stripes:layout-component>
 </stripes:layout-render>

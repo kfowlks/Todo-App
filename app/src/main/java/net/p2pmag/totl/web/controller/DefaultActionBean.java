@@ -91,8 +91,7 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	
-
-    	return new ForwardResolution( "/WEB-INF/protected_jsps/default.jsp" );
+    	return new ForwardResolution( DEFAULT );
     }
     
     public Resolution deleteTaskList()
@@ -100,7 +99,7 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     	logger.info( "Todo List {} ", list );
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	todoService.deleteTodoList( list.getId() );    	
-    	return new RedirectResolution( DefaultActionBean.class, "index");
+    	return new RedirectResolution( DefaultActionBean.class, "index" );
     }
     
     public Resolution addList()
@@ -109,7 +108,7 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     	logger.info( "Todo List {} ", list );
     	todoService.addTodoList( list );
     	
-    	return new ForwardResolution( "/WEB-INF/protected_jsps/default.jsp" );
+    	return new ForwardResolution( DEFAULT );
     }
        
 }
