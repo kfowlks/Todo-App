@@ -37,10 +37,22 @@
      <ul>
 	    <c:forEach items="${actionBean.list.todoTasks}" var="task" varStatus="loop">
 	        <li>
-		        ${task.description} <stripes:link  beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="deleteTask" >
+	        	<c:choose>
+		        	<c:when test="${task.completed == true}">
+				     	<b>${task.description}</b>
+			        </c:when>
+			        <c:otherwise>
+						${task.description}
+			        </c:otherwise> 
+		        </c:choose>
+		        <stripes:link  beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="deleteTask" >
      				<stripes:param name="task.id">${task.id}</stripes:param>
      				<stripes:param name="list.id">${actionBean.list.id}</stripes:param> Remove
      			</stripes:link>
+     			<stripes:link beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="markTaskComplete" >
+     				<stripes:param name="task.id">${task.id}</stripes:param>Mark Complete
+     				<stripes:param name="list.id">${actionBean.list.id}</stripes:param>
+     			</stripes:link>     			
 	     	</li>
 	    </c:forEach>
     </ul>

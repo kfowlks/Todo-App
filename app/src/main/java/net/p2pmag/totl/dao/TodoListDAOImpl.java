@@ -2,6 +2,7 @@ package net.p2pmag.totl.dao;
 
 
 
+import java.sql.SQLException;
 import java.util.List;
 
 import net.p2pmag.totl.domain.TodoList;
@@ -51,25 +52,24 @@ public class TodoListDAOImpl extends GenericDAO<TodoList, Integer> implements To
 		}
 	}
 
-	@Override
-	public void delete(TodoList domain) {
-		
-		String sql = "DELETE FROM TodoLists WHERE id = :id";
-		
-		try (Connection con = sql2o.open()) {
-		    con.createQuery(sql).bind(domain).executeUpdate().getKey();;
-		}		
-	}
 
-	public void delete(Integer id) {
+	public boolean delete(Integer id) {
 		
 		String sql = "DELETE FROM TodoLists WHERE id = :id";
+		int row = 0;
 		
 		try (Connection con = sql2o.open()) {
 			con.createQuery(sql).addParameter("id", id).executeUpdate();
-			int row = con.getResult();
+			row = con.getResult();
+			
 			logger.info("id/row: {}/{}", id, row );
-		}		
+		}	
+		catch (Exception e)
+		{
+			logger.error(e.getMessage(), e );
+		}
+	
+		return (row > 0 );
 	}
 
 	

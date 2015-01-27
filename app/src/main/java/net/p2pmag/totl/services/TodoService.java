@@ -11,6 +11,7 @@ public interface TodoService {
 	public List<TodoList> searchTodoList();
 	
 	public TodoList getTodoList(Integer integer);
+	public TodoTask getTodoTask(Integer id);
 	
 	public void addTodoListPartial( String name, String description );
 	public void addTodoList( TodoList list );
@@ -20,10 +21,6 @@ public interface TodoService {
 	
 	public void updateTodoTask( TodoTask task );
 	public void updateTodoList( TodoList list  );
-
-	
-	public void deleteTodoTask( TodoTask task );
-	public void deleteTodoList( TodoList list  );
 	
 	public void deleteTodoTask( Integer id );
 	public void deleteTodoList( Integer id  );

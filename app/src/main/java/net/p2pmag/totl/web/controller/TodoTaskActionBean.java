@@ -26,6 +26,7 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.SimpleError;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,7 +100,8 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	logger.info( "Todo List {} ", list );
     	logger.info( "Todo Task {} ", task );
-    	todoService.deleteTodoTask( task.getId() );
+    	
+    	todoService.deleteTodoTask( task.getId());
     	
     	//return new ForwardResolution( PAGE ).addParameter("id", list.getId());
     	return new RedirectResolution( TodoTaskActionBean.class, "index").addParameter("list.id", list.getId());
@@ -113,6 +115,18 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     	logger.info( "Todo List {} ", list );
     	
     	todoService.addTodoTaskPartial( list, task.getDescription() );
+    	
+    	return index();
+    }
+    
+    public Resolution markTaskComplete()
+    {
+    	logger.info( "In Event {} ", this.getContext().getEventName());
+    	
+    	this.task = todoService.getTodoTask( task.getId() );
+    	this.task.setCompleted(true);
+    	
+    	todoService.updateTodoTask(this.task);
     	
     	return index();
     }

@@ -52,6 +52,13 @@ public class TodoServiceImpl implements TodoService {
 		return tl;		
 	}
 
+	
+	@Override
+	public TodoTask getTodoTask(Integer id) {
+		return todoTaskDAO.findById(id);	
+	}
+
+	
 	@Override
 	public void addTodoListPartial(String name, String description) {		
 		todoListDAO.save( new TodoList( name, description ) );
@@ -82,33 +89,19 @@ public class TodoServiceImpl implements TodoService {
 
 	@Override
 	public void updateTodoTask(TodoTask task) {
-		// TODO Auto-generated method stub
-		
+		todoTaskDAO.update(task);		
 	}
 
 	@Override
 	public void updateTodoList(TodoList list) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteTodoTask(TodoTask task) {
-		todoTaskDAO.delete(task);
-	}
-
-	@Override
-	public void deleteTodoList(TodoList list) {
-		// TODO Auto-generated method stub
-		
+		todoListDAO.update(list);
 	}
 
 	@Override
 	public void deleteTodoTask(Integer id) {
-		// TODO Auto-generated method stub
-		
-		todoTaskDAO.delete(id);
-		
+		// TODO Auto-generated method stub		
+		todoTaskDAO.delete(id);		
 	}
 
 	@Override

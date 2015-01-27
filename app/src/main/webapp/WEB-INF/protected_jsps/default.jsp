@@ -35,6 +35,7 @@
     <c:forEach items="${actionBean.lists}" var="item" varStatus="loop">
         <li>
         ${item.name}
+        ${item.name}
         <stripes:link beanclass="net.p2pmag.totl.web.controller.TodoTaskActionBean" event="doPage" ><stripes:param name="list.id">${item.id}</stripes:param>View</stripes:link>
         <stripes:link beanclass="net.p2pmag.totl.web.controller.DefaultActionBean" event="deleteTaskList" ><stripes:param name="list.id">${item.id}</stripes:param>Delete</stripes:link>
      	</li>

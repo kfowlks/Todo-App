@@ -22,6 +22,7 @@ import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.SimpleError;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,7 +99,9 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     {    	
     	logger.info( "Todo List {} ", list );
     	logger.info( "In Event {} ", this.getContext().getEventName());
-    	todoService.deleteTodoList( list.getId() );    	
+    	
+    	todoService.deleteTodoList( list.getId() );
+    	
     	return new RedirectResolution( DefaultActionBean.class, "index" );
     }
     

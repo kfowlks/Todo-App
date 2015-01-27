@@ -7,8 +7,8 @@ public interface DAO<T, ID extends Serializable> {
 	
 	public List<T> findAll();
 	public void save(final T domain);
-	public void update(final T domain);
-	public void delete(final T domain);
+	public void update(final T domain);	
+	public boolean delete(Integer id);
 	public T findById(ID id);
 	
 }
