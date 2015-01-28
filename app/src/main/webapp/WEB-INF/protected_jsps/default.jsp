@@ -6,24 +6,21 @@
 <stripes:layout-render name="/WEB-INF/protected_jsps/layout/_template.jsp" pageTitle="TurnOffTheLights" nav="default">
     
     <stripes:layout-component name="html_head">
-
     </stripes:layout-component>
     
     <stripes:layout-component name="html_navbar">
-    <!-- 
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-      -->
-     <h3 class="muted">Todo Example</h3>
-    
+     <stripes:messages />
     </stripes:layout-component>
     
     <stripes:layout-component name="contents">
+    
+    <h1 class="text-center">Todo Sample
+        <p class="lead">Stripes + Bootstrap 3</p> 
+    </h1> 
+    
+    
+    <stripes:errors></stripes:errors>
+    
     
     <stripes:form beanclass="net.p2pmag.totl.web.controller.DefaultActionBean" focus="">
     	<stripes:submit name="addList" value="addList" >Add New Todo List</stripes:submit>    	
@@ -31,7 +28,7 @@
     </stripes:form>
      <br />
      
-    <ul>
+    <ul class="nav nav-tabs nav-stacked">
     <c:forEach items="${actionBean.lists}" var="item" varStatus="loop">
         <li>
         ${item.name}
@@ -49,5 +46,13 @@
       </div>
        -->
 	<!--  <img src="${ctx}/UI/site/images/headtorso.jpg" class="half" width="%50" />  -->
+	
+	<hr>
+      
+      	<h4 class="text-center">
+      		
+        </h4>
+      
+        <hr>
     </stripes:layout-component>
 </stripes:layout-render>

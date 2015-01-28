@@ -13,16 +13,15 @@
     </stripes:layout-component>
     
     <stripes:layout-component name="html_navbar">
-    <!-- 
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-      -->
+ 
+	    <h1 class="text-center">Todo Sample
+	        <p class="lead">Stripes + Bootstrap 3</p> 
+	    </h1> 
+	    
+	    
      <h3 class="muted">Editing Todo List ${actionBean.list.name}</h3>
+     
+     <stripes:errors></stripes:errors>
      
     </stripes:layout-component>
     
@@ -34,12 +33,12 @@
     	<stripes:hidden name="list.id" value="${actionBean.list.id}"></stripes:hidden>    	
     </stripes:form>
     
-     <ul>
+     <ul class="nav nav-tabs nav-stacked">
 	    <c:forEach items="${actionBean.list.todoTasks}" var="task" varStatus="loop">
 	        <li>
 	        	<c:choose>
 		        	<c:when test="${task.completed == true}">
-				     	<b>${task.description}</b>
+				     	${task.description} <span class="label label-inverse">Done</span>
 			        </c:when>
 			        <c:otherwise>
 						${task.description}

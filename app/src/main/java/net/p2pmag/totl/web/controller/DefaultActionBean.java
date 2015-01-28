@@ -19,8 +19,11 @@ import net.p2pmag.totl.web.common.AbstractActionBean;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.HttpCache;
+import net.sourceforge.stripes.action.Message;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.SimpleMessage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.SimpleError;
 
@@ -34,6 +37,7 @@ import org.slf4j.LoggerFactory;
  * @author   <a href="mailto:kfowlks@gmail.com">Kevin Fowlks</a>
  * @version  1.0
  */
+@HttpCache(allow=false)
 public class DefaultActionBean extends AbstractActionBean implements ActionBean
 {
 	
@@ -61,7 +65,6 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
 	public void setLists(List<TodoList> lists) {
 		this.lists = lists;
 	}
-
 
 	@SpringBean
 	private transient TodoService todoService;
@@ -102,6 +105,8 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     	
     	todoService.deleteTodoList( list.getId() );
     	
+    	setMessage("Your task was successfully deleted!");
+    	
     	return new RedirectResolution( DefaultActionBean.class, "index" );
     }
     
@@ -111,7 +116,9 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     	logger.info( "Todo List {} ", list );
     	todoService.addTodoList( list );
     	
-    	return new ForwardResolution( DEFAULT );
+    	setMessage("A task was successfully added!");
+    	
+    	return new RedirectResolution( DefaultActionBean.class, "index" );
     }
        
 }

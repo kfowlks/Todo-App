@@ -61,7 +61,8 @@
 	  <body>		
 		<div class="container-narrow">
 		
-			<stripes:layout-component name="html_navbar" />			
+			<stripes:layout-component name="html_navbar" />
+				
 			<stripes:layout-component name="contents" />
 			
 		    <script src="http://code.jquery.com/jquery-latest.js"></script>

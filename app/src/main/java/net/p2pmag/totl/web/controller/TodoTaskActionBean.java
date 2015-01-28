@@ -22,6 +22,7 @@ import net.sourceforge.stripes.action.After;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.HttpCache;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.controller.LifecycleStage;
@@ -38,6 +39,7 @@ import org.slf4j.LoggerFactory;
  * @author   <a href="mailto:kfowlks@gmail.com">Kevin Fowlks</a>
  * @version  1.0
  */
+@HttpCache(allow=false)
 public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
 {
 	
@@ -87,7 +89,6 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     	
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	logger.info( "Todo List {} ", list );
-//    	logger.info("id: {}", list.getId() );
 	    
 	    this.list = todoService.getTodoList( list.getId() );
     	
@@ -103,7 +104,8 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     	
     	todoService.deleteTodoTask( task.getId());
     	
-    	//return new ForwardResolution( PAGE ).addParameter("id", list.getId());
+    	setMessage("Your task was successfully deleted!");
+    	
     	return new RedirectResolution( TodoTaskActionBean.class, "index").addParameter("list.id", list.getId());
     }
     
@@ -116,7 +118,9 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     	
     	todoService.addTodoTaskPartial( list, task.getDescription() );
     	
-    	return index();
+    	setMessage("Your task was successfully added!");
+    	
+    	return new RedirectResolution( TodoTaskActionBean.class, "index").addParameter("list.id", list.getId());
     }
     
     public Resolution markTaskComplete()
@@ -124,11 +128,11 @@ public class TodoTaskActionBean extends AbstractActionBean implements ActionBean
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	
     	this.task = todoService.getTodoTask( task.getId() );
-    	this.task.setCompleted(true);
+    	this.task.setCompleted(!task.isCompleted());
     	
     	todoService.updateTodoTask(this.task);
     	
-    	return index();
+    	return new RedirectResolution( TodoTaskActionBean.class, "index").addParameter("list.id", list.getId());
     }
        
 }
