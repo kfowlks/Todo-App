@@ -1,4 +1,4 @@
-package net.p2pmag.asktheelder.test.web;
+package net.p2pmag.totl.test.web;
 
 import org.junit.Assert;
 import org.junit.Test;

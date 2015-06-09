@@ -22,9 +22,13 @@
 		<context:include-filter type="regex" 
                        expression="net.p2pmag.totl.dao.*DAO*" /> 
 		<context:include-filter type="regex" 
-                       expression="net.p2pmag.totl.services.*Service*" /> 
+                       expression="net.p2pmag.totl.services.*Service*" />
+                       
+        <context:include-filter type="regex" expression="net.p2pmag.totl.test.*Test*" /> 
 	</context:component-scan>
-	
+	       
+		
+		
 	<bean id="datasource" class="com.zaxxer.hikari.HikariDataSource">
 	
 			<constructor-arg>
