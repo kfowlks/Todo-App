@@ -31,7 +31,7 @@
 		        <bean class="com.zaxxer.hikari.HikariConfig">
 		            <constructor-arg>
 		                <props>
-		                    <prop key="dataSource.url">jdbc:hsqldb:file:c:/home3/TurnOffTheLights/hsqldb/tolt</prop>
+		                    <prop key="dataSource.url">jdbc:hsqldb:file:c:/home3/totl/hsqldb/totl</prop>
 		                    <prop key="dataSource.user">sa</prop>
 		                    <prop key="dataSource.password"></prop>
 		                </props>

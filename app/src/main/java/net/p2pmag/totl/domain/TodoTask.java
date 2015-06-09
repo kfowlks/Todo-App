@@ -5,24 +5,33 @@ import java.sql.Timestamp;
 
 public class TodoTask implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4676010711604224430L;
 	private Integer   id;
-	private Integer   list_id;
+	private int   	  listorder;
 	private String    description;
 	private boolean   completed;
 	private Timestamp createdon;
+	private Timestamp completedon;
 	
+	public TodoTask() {
+		super();		
+	}
+	
+	public TodoTask(String description) {
+		super();
+		this.description = description;
+	}
+
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getList_id() {
-		return list_id;
-	}
-	public void setList_id(Integer list_id) {
-		this.list_id = list_id;
-	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -30,10 +39,10 @@ public class TodoTask implements Serializable {
 		this.description = description;
 	}
 	public boolean isCompleted() {
-		return completed;
+		return ((completedon!=null)&&(!completedon.after(new Timestamp(System.currentTimeMillis()))));
 	}
 	public void setCompleted(boolean completed) {
-		this.completed = completed;
+		
 	}
 	public Timestamp getCreatedon() {
 		return createdon;
@@ -41,16 +50,30 @@ public class TodoTask implements Serializable {
 	public void setCreatedon(Timestamp createdon) {
 		this.createdon = createdon;
 	}
-	
-	
-	
-	
-	
+
+	public int getListorder() {
+		return listorder;
+	}
+
+	public void setListorder(int listorder) {
+		this.listorder = listorder;
+	}
+
+	public Timestamp getCompletedon() {
+		return completedon;
+	}
+
+	public void setCompletedon(Timestamp completedon) {
+		this.completedon = completedon;
+	}
+
 	@Override
 	public String toString() {
-		return String
-				.format("TodoTask [id=%s, list_id=%s, description=%s, completed=%s, createdon=%s]",
-						id, list_id, description, completed, createdon);
+		return "TodoTask [id=" + id + ", listorder=" + listorder
+				+ ", description=" + description + ", completed=" + completed
+				+ ", createdon=" + createdon + ", completedon=" + completedon
+				+ "]";
 	}
+
 
 }

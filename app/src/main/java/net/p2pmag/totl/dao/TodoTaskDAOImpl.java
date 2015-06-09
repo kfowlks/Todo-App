@@ -2,15 +2,10 @@ package net.p2pmag.totl.dao;
 
 
 
-import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
-import net.p2pmag.totl.domain.TodoList;
 import net.p2pmag.totl.domain.TodoTask;
-import net.p2pmag.totl.services.TodoServiceImpl;
-
-import java.io.Serializable;
-import java.lang.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,65 +24,100 @@ public class TodoTaskDAOImpl extends GenericDAO<TodoTask, Integer> implements To
 	
 	public List<TodoTask> findAll() {
 		try(Connection con = sql2o.open()) {
-			 return con.createQuery("SELECT id, list_id, description, createdon, completed FROM TodoTasks").executeAndFetch(TodoTask.class);
+			 return con.createQuery("SELECT id, listorder, description, createdon, completedon FROM TodoTasks ORDER BY createdon,listorder").executeAndFetch(TodoTask.class);
 		}
 	}
 
-	public List<TodoTask> findAllByList( Integer list_id ) {
+	public List<TodoTask> findAllCompletedTasks( ) {
 		try(Connection con = sql2o.open()) {
-			 return con.createQuery("SELECT id, list_id, description, createdon, completed FROM TodoTasks WHERE list_id = :list_id").addParameter("list_id", list_id).executeAndFetch(TodoTask.class);
+			 return con.createQuery("SELECT id, listorder, description, createdon, completedon FROM TodoTasks WHERE completedon IS NOT NULL ORDER BY createdon,listorder").executeAndFetch(TodoTask.class);
+		}
+	}
+
+	public List<TodoTask> findAllOpenTaskCreatedOn( Timestamp today ) {
+		try(Connection con = sql2o.open()) {
+			 return con.createQuery("SELECT id, listorder, description, createdon, completedon FROM TodoTasks WHERE listorder = :today ORDER BY createdon,listorder").addParameter("today", today ).executeAndFetch(TodoTask.class);
 		}
 	}
 	
+	public List<TodoTask> findAllOpenTask( ) {
+		try(Connection con = sql2o.open()) {
+			 return con.createQuery("SELECT id, listorder, description, createdon, completedon FROM TodoTasks WHERE completedon IS NULL ORDER BY createdon,listorder").executeAndFetch(TodoTask.class);
+		}
+	}
 	
 	@Override
 	public void save(TodoTask domain) {
 		
-		String sql = "INSERT INTO TodoTasks (id, list_id, description, createdon, completed) values (:id, :list_id, :description, :createdon, :completed )";
+		String sql = "INSERT INTO TodoTasks (id, listorder, description, createdon, completedon) values (:id, :listorder, :description, :createdon, :completedon )";
+		
+		if( domain.getId() == null )
+			domain.setCreatedon(new Timestamp (System.currentTimeMillis()));
 		
 		try (Connection con = sql2o.open()) {
 		    con.createQuery(sql).bind(domain).executeUpdate().getKey();;
 		}
+		
 	}
 
 	@Override
 	public void update(TodoTask domain) {
 		
-		String sql = "UPDATE TodoTasks SET description = :description, completed = :completed, createdon = :createdon WHERE id = :id";
+		String sql = "UPDATE TodoTasks SET description = :description, completedon = :completedon WHERE id = :id";
 		
 		try (Connection con = sql2o.open()) {
 		    con.createQuery(sql).bind(domain).executeUpdate();
 		}
 	}
 
-
 	@Override
-	public boolean delete(Integer id) {
+	public void delete(TodoTask domain) {
 		
 		String sql = "DELETE FROM TodoTasks WHERE id = :id";
-		int row = 0;
+		
+		try (Connection con = sql2o.open()) {
+			con.createQuery(sql).addParameter("id", domain.getId()).executeUpdate();
+			int row = con.getResult();
+			logger.debug("obj/row: {}/{}", domain, row );
+		}		
+	}
+
+	@Override
+	public void delete(Integer id) {
+		
+		String sql = "DELETE FROM TodoTasks WHERE id = :id";
+		
 		try (Connection con = sql2o.open()) {
 			con.createQuery(sql).addParameter("id", id).executeUpdate();
-			row = con.getResult();
-			logger.info("id/row: {}/{}", id, row );
-		}
-		catch (Exception e)
-		{
-			logger.error(e.getMessage(), e );
-		}
-		
-		return (row > 0 );
+			int row = con.getResult();
+			logger.debug("id/row: {}/{}", id, row );
+		}		
 	}
 	
+	
+
+	@Override
+	public TodoTask findByDescription(String description) {
+		try(Connection con = sql2o.open()) {
+			
+			TodoTask obj =  con.createQuery("SELECT id, description, listorder, createdon, completedon FROM TodoTasks WHERE id = :id").addParameter("description", description).executeAndFetchFirst(TodoTask.class);
+			
+			 logger.debug("obj: {}", description );
+			 logger.debug("obj: {}", obj );
+			 
+			 return obj;
+		}
+	}
+
 	
 	@Override
 	public TodoTask findById(Integer id) {
 		try(Connection con = sql2o.open()) {
 			
-			TodoTask obj =  con.createQuery("SELECT id, description, createdon, completed FROM TodoTasks WHERE id = :id").addParameter("id", id).executeAndFetchFirst(TodoTask.class);
+			TodoTask obj =  con.createQuery("SELECT id, description, listorder, createdon, completedon FROM TodoTasks WHERE id = :id").addParameter("id", id).executeAndFetchFirst(TodoTask.class);
 			
-			 logger.info("obj: {}", id );
-			 logger.info("obj: {}", obj );
+			 logger.debug("obj: {}", id );
+			 logger.debug("obj: {}", obj );
 			 
 			 return obj;
 		}

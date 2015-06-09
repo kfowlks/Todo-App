@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Logout Action Bean
  *
- * @author   <a href="mailto:kruthjam@msu.edu">Kevin Fowlks</a>
+ * @author   <a href="mailto:fowlks@msu.edu">Kevin Fowlks</a>
  * @version  1.0
  */
 public class LogoutActionBean extends AbstractActionBean implements ActionBean

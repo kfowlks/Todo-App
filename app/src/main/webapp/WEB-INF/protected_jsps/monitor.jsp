@@ -10,3 +10,4 @@ Date: ${actionBean.currentDate}<br />
 Database Status: <c:choose><c:when test="${actionBean.dbStatus}">Online</c:when><c:otherwise>Offline</c:otherwise></c:choose><br /> 
 <br />
 Application Status: <c:choose><c:when test="${actionBean.dbStatus}">OK</c:when><c:otherwise>Offline</c:otherwise></c:choose>
+

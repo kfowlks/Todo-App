@@ -10,7 +10,7 @@
          <Arg>
 	        <New class="com.zaxxer.hikari.HikariConfig">
 		        <Set name="driverClassName">org.hsqldb.jdbcDriver</Set>
-		        <Set name="jdbcUrl">jdbc:hsqldb:file:/home3/TurnOffTheLights/hsqldb/tolt</Set>
+		        <Set name="jdbcUrl">jdbc:hsqldb:file:c:/home2/totl/hsqldb/totl</Set>
 		        <Set name="username">sa</Set>
 		        <Set name="password"></Set>			        
 		  </New>

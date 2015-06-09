@@ -3,7 +3,7 @@
 <jboss-web>
 
   <!-- Change the Context Root to your Web Application Name  -->
-  <context-root>/asktheelder</context-root>
+  <context-root>/</context-root>
   
   <!--  Use the following if the application is set to the root of a virtual host
   <context-root>/</context-root>

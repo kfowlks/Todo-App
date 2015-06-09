@@ -16,58 +16,31 @@
 	<head>
 		<meta charset=utf-8 />
 		<title>${pageTitle}</title>
-		<link href="webjars/flatstrap/3.1.2/css/flatstrap.css" rel="stylesheet" media="screen">
-	  <style type="text/css">
-      body {
-        padding-top: 20px;
-        padding-bottom: 40px;
-      }
-
-      /* Custom container */
-      .container-narrow {
-        margin: 0 auto;
-        max-width: 700px;
-      }
-      .container-narrow > hr {
-        margin: 30px 0;
-      }
-
-      /* Main marketing message and sign up button */
-      .jumbotron {
-        margin: 60px 0;
-        text-align: center;
-      }
-      .jumbotron h1 {
-        font-size: 72px;
-        line-height: 1;
-      }
-      .jumbotron .btn {
-        font-size: 21px;
-        padding: 14px 24px;
-      }
-
-      /* Supporting marketing content */
-      .marketing {
-        margin: 60px 0;
-      }
-      .marketing p + h4 {
-        margin-top: 28px;
-      }
-    </style>
-	
-	<stripes:layout-component name="html_head" />
-	</head>
-  
-	  <body>		
-		<div class="container-narrow">
-		
-			<stripes:layout-component name="html_navbar" />
-				
-			<stripes:layout-component name="contents" />
-			
-		    <script src="http://code.jquery.com/jquery-latest.js"></script>
-		    <script src="webjars/flatstrap/3.1.2/flatstrap.min.js"></script>	    
+		<link href="webjars/bootstrap/3.3.4/dist/css/bootstrap.css" rel="stylesheet" media="screen" />
+		<stripes:layout-component name="html_head" />
+	</head>  	
+	<body>		
+		<div class="container">
+		<stripes:layout-component name="html_navbar" />
+		<stripes:layout-component name="contents" />
+	    <script src="http://code.jquery.com/jquery-latest.js"></script>
+	    <script src="webjars/bootstrap/3.3.4/dist/js/bootstrap.min.js"></script>			    
+	    <script type="text/javascript">
+	    $(document).ready(function() {
+	        $('#selecctall').click(function(event) {  //on click 
+	            if(this.checked) { // check select status
+	                $("input[name^='selectedTodoTaskIds']").each(function() { //loop through each checkbox
+	                    this.checked = true;  //select all checkboxes with class "checkbox1"               
+	                });
+	            }else{
+	            	$("input[name^='selectedTodoTaskIds']").each(function() { //loop through each checkbox
+	                    this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+	                });         
+	            }
+	        });
+	    });	   
+	    </script>
 	    </div>
-	  </body>
+  	</body>
 </html>
 </stripes:layout-definition>

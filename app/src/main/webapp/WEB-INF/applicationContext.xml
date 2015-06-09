@@ -16,7 +16,6 @@
     </jdbc:embedded-database>
     -->
     <!-- enable component scanning and autowire (beware that this does not enable mapper scanning!) -->    
-    
 	
 	<context:component-scan base-package="net.p2pmag.totl" > 
 		<context:include-filter type="regex" 
@@ -31,7 +30,7 @@
 		        <bean class="com.zaxxer.hikari.HikariConfig">
 		            <constructor-arg>
 		                <props>
-		                    <prop key="dataSource.url">jdbc:hsqldb:file:c:/home3/totl/hsqldb/tolt</prop>
+		                    <prop key="dataSource.url">jdbc:hsqldb:file:c:/home2/totl/hsqldb/totl</prop>
 		                    <prop key="dataSource.user">sa</prop>
 		                    <prop key="dataSource.password"></prop>
 		                </props>

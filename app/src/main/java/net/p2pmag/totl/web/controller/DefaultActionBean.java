@@ -7,20 +7,19 @@
  */
 package net.p2pmag.totl.web.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import net.p2pmag.totl.domain.TodoList;
+import net.p2pmag.totl.domain.TodoTask;
 import net.p2pmag.totl.services.TodoService;
-import net.p2pmag.totl.services.TodoServiceImpl;
 import net.p2pmag.totl.web.common.AbstractActionBean;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.HttpCache;
-import net.sourceforge.stripes.action.Message;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.SimpleMessage;
@@ -41,29 +40,39 @@ import org.slf4j.LoggerFactory;
 public class DefaultActionBean extends AbstractActionBean implements ActionBean
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3695497281006444130L;
 	private final static Logger logger = LoggerFactory.getLogger( DefaultActionBean.class );
 	protected static final String DEFAULT = "/WEB-INF/protected_jsps/default.jsp";
 	
-	private TodoList list;
-	private List<TodoList> lists;
+	private TodoTask task;
+	private List<TodoTask> lists;
+	private List<Integer> selectedTodoTaskIds;
 
-	public TodoList getList() {
-		return list;
+	public TodoTask getTask() {
+		return task;
 	}
 
-
-	public void setList(TodoList list) {
-		this.list = list;
+	public void setTask(TodoTask task) {
+		this.task = task;
 	}
-
-
-	public List<TodoList> getLists() {
+	
+	public List<TodoTask> getLists() {
 		return lists;
 	}
 
-
-	public void setLists(List<TodoList> lists) {
+	public void setLists(List<TodoTask> lists) {
 		this.lists = lists;
+	}
+
+	public List<Integer> getSelectedTodoTaskIds() {
+		return selectedTodoTaskIds;
+	}
+
+	public void setSelectedTodoTaskIds(List<Integer> selectedTodoTaskIds) {
+		this.selectedTodoTaskIds = selectedTodoTaskIds;
 	}
 
 	@SpringBean
@@ -77,48 +86,130 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     @DefaultHandler public Resolution index()
     {
     	HttpServletRequest    request = this.getContext().getRequest();
-    	HttpSession session = request.getSession(false);
+    	HttpSession           session = request.getSession(false);
     	
-    	logger.info( "In Event {} ", this.getContext().getEventName());
+    	logger.debug( "In Event {} ", this.getContext().getEventName());
     	
-    	lists = todoService.getAllTodoList();    	
-    	logger.info( "Todo List Size{} ", lists.size());
+    	lists = todoService.getAllTasks();
     	
-    	//todoService.addTodoListPartial("IBM " + System.currentTimeMillis(), "Again!, Again!" );
-    	
-    	logger.info( "Todo List Size{} ", lists.size());
-    	
-    	for (TodoList todos: lists)
+    	logger.debug( "Todo List Size{} ", lists.size());
+    	    	
+    	for (TodoTask tasks: lists)
     	{
-    		logger.info( "Todo ID {} / Name {} ", todos.getId(), todos.getName() );
+    		logger.debug( "Todo ID {} / Name {} ", tasks.getId(), tasks.getDescription());
     	}
     
-    	logger.info( "In Event {} ", this.getContext().getEventName());
-    	
-    	return new ForwardResolution( DEFAULT );
+    	return new ForwardResolution( "/WEB-INF/protected_jsps/default.jsp" );
     }
     
-    public Resolution deleteTaskList()
-    {    	
-    	logger.info( "Todo List {} ", list );
-    	logger.info( "In Event {} ", this.getContext().getEventName());
-    	
-    	todoService.deleteTodoList( list.getId() );
-    	
-    	setMessage("Your task was successfully deleted!");
-    	
-    	return new RedirectResolution( DefaultActionBean.class, "index" );
-    }
-    
-    public Resolution addList()
+    public Resolution addTask()
     {
+    	HttpServletRequest    request = this.getContext().getRequest();
+    	HttpSession           session = request.getSession(false);
+    	
     	logger.info( "In Event {} ", this.getContext().getEventName());
-    	logger.info( "Todo List {} ", list );
-    	todoService.addTodoList( list );
     	
-    	setMessage("A task was successfully added!");
+		 if (this.task == null) 
+		 {
+		     getContext().getValidationErrors().addGlobalError( new SimpleError("You must enter a description for a task!") );
+		     
+		     //return new RedirectResolution( DefaultActionBean.class, "index");
+		     //return new ForwardResolution( "/WEB-INF/protected_jsps/default.jsp" );
+		     return new ForwardResolution( DefaultActionBean.class, "index" );
+		     
+		 }
     	
-    	return new RedirectResolution( DefaultActionBean.class, "index" );
+    	todoService.addTask(task);
+    	getContext().getMessages().add( new SimpleMessage("A new todo was added."));
+		logger.info( "Todo ID {} / Name {} ", task.getId(), task.getDescription());		
+    	
+		lists = todoService.getAllTasks();
+		
+		return new RedirectResolution( DefaultActionBean.class, "index");
+    }
+    
+   
+    public Resolution completeTasks()
+    {    	
+    	logger.info( "In Event {} ", this.getContext().getEventName());
+    	int cntTaskComplete = 0;
+    	
+    	if( selectedTodoTaskIds == null ) {
+    		getContext().getValidationErrors().addGlobalError(new SimpleError("You must select at least one task to complete.") );
+    		return new ForwardResolution( DefaultActionBean.class, "index" );    		
+    	}
+    	else    		
+	    	for( Integer id: selectedTodoTaskIds ) 
+	    	{	    		
+	    		if( id != null )
+	    		{
+	    			logger.info("completeTasks id: " + id );
+	    			
+	    			TodoTask tt = todoService.getTask(id);
+	    			
+	    			if ( !tt.isCompleted() ) 
+	    			{
+	    				cntTaskComplete++;
+		    			logger.info("completeTasks task: id {}" + tt );
+		    			tt.setCompletedon(new Timestamp( System.currentTimeMillis()));	    			
+		    			todoService.updateTask( tt );
+		    			
+	    			}
+	    		}	    		
+	    	}
+    		if( cntTaskComplete > 0 ) getContext().getMessages().add( new SimpleMessage( cntTaskComplete + " todo(s) were marked complete."));
+    	
+    	return new RedirectResolution( DefaultActionBean.class, "index");
+    }
+    
+    
+    public Resolution deleteTask()
+    {    	
+    	logger.info( "In Event {} ", this.getContext().getEventName());
+    	    
+    	if( task == null ) {
+    		getContext().getValidationErrors().addGlobalError(new SimpleError("You must select at least one task to delete.") );
+    		return new ForwardResolution( DefaultActionBean.class, "index" );    		
+    	}
+    	else {		
+			logger.info("deleteTodoList id: " + task.getId() );	    			
+			TodoTask tt = todoService.getTask( task.getId() );
+			logger.info("deleteTodoList task: id {}" + tt, tt.getId() );	    			
+			todoService.deleteTask( task.getId() );
+			getContext().getMessages().add( new SimpleMessage( " A todo was removed."));
+	    }
+    	
+    	return new RedirectResolution( DefaultActionBean.class, "index");
+    }
+    
+    public Resolution deleteTasks()
+    {   
+    	int cntTaskComplete = 0;
+
+    	logger.info( "In Event {} ", this.getContext().getEventName());
+    	
+    	if( selectedTodoTaskIds == null ) {
+    		getContext().getValidationErrors().addGlobalError(new SimpleError("You must select at least one task to delete.") );
+    		return new ForwardResolution( DefaultActionBean.class, "index" );    		
+    	}
+    	else    
+    	{
+	    	for( Integer id: selectedTodoTaskIds ) 
+	    	{	    		
+	    		if( id != null )
+	    		{
+	    			cntTaskComplete++;
+	    			logger.info("deleteTodoList id: " + id );	    			
+	    			TodoTask tt = todoService.getTask(id);
+	    			logger.info("deleteTodoList task: id {}" + tt, tt.getId() );	    			
+	    			todoService.deleteTask( id );
+	    		}
+	    	}
+	    	if( cntTaskComplete > 0 ) getContext().getMessages().add( new SimpleMessage( cntTaskComplete + " todo(s) were marked complete."));
+    	}
+    	
+    	
+    	return new RedirectResolution( DefaultActionBean.class, "index");
     }
        
 }
