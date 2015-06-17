@@ -9,7 +9,7 @@ buildscript {
     dependencies {
         classpath 'gradle-templates:gradle-templates:1.5'
 		classpath 'org.akhikhl.gretty:gretty:1.1.8'
-		classpath 'org.flywaydb:flyway-gradle-plugin:3.1'		
+		classpath 'org.flywaydb:flyway-gradle-plugin:3.2.1'		
     }
 }
 
@@ -20,7 +20,7 @@ apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'templates'
 apply plugin: "org.akhikhl.gretty"
-apply plugin: 'flyway'
+apply plugin: 'org.flywaydb.flyway'
 
 version = '1.0'
 sourceCompatibility = '1.7'
@@ -28,7 +28,7 @@ targetCompatibility = '1.7'
 defaultTasks 'clean', 'war'
 
 flyway {
-    url = 'jdbc:hsqldb:file:c:/home2/totl/hsqldb/totl'
+    url = 'jdbc:hsqldb:file:hsqldb/totl'
     user = 'sa'
 }
 

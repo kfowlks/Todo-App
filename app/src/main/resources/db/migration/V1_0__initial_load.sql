@@ -1,7 +1,7 @@
 -- Created by Vertabelo (http://vertabelo.com)
 -- Last modification date: 2015-04-13 15:38:20.844
 
-
+SET AUTOCOMMIT TRUE;
 -- tables
 -- Table: Task
 CREATE TABLE TodoTasks (
