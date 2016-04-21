@@ -13,7 +13,21 @@ build/
 /build
 .gradle
 .settings
+*.class
 
+# Package Files #
+*.war
+*.ear
+*.trc
+
+# Work Directory#
+work/
+build/
+
+*.classpath
+*.gradle/
+*.project
+*.settings/
 
 ### Eclipse ###
 *.pydevproject
