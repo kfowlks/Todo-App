@@ -1,4 +1,4 @@
-include ":api", ":common", ":app"
+include ":Todo-App-API", ":Todo-App-Common", ":Todo-App-Web"
 
 // Rename each child project to its path: Foo becomes FeatureA-Foo or FeatureB-Foo, depending on the Foo.
 rootProject.children.each { p ->

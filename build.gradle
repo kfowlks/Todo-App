@@ -1,14 +1,100 @@
-allprojects
-{
-	// Put instructions for all projects	
-	// task hello << { task -> println "I'm $task.project.name" }
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'maven'
+
+
+compileJava {
+  sourceCompatibility = 1.7
+  targetCompatibility = 1.6
 }
 
-/* 
-Project specific stuff e.g. project(':SUBPRJNAME')
-project(':api') {
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+allprojects {
+  task hello << { task -> println "Working on $task.project.name" }
+}
+
+
+eclipse.classpath.file {
+    whenMerged { classpath ->
+        classpath.entries.findAll { entry -> entry.kind == 'lib' }*.exported = false
+    }
+}
+
+
+/*
+
+repositories {
+  def baseUrl = 'http://repository.tech.ais.msu.edu/nexus/content'
+
+  maven {
+    url "${baseUrl}/groups/MSUPublic"
+    credentials {
+      username repoUser
+      password repoPass
+    }
+  }
 }
 */
 
-/* Default gradle command will list all tasks available */
-defaultTasks 'tasks'
+
+
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'eclipse-wtp'
+  //apply plugin: 'propdeps-eclipse' //this one actually applies propdeps and eclipse
+  apply plugin: 'maven'
+  apply plugin: 'pmd'
+  apply plugin: 'findbugs'  
+  
+
+	pmd {
+	  ignoreFailures = true
+	  sourceSets = [sourceSets.main]
+	  reportsDir = file("$project.buildDir/reports/pmd")
+	  //ruleSets = [ "basic", "braces"]
+	}
+	
+	findbugs {
+	  ignoreFailures = true
+	  toolVersion = "2.0.1"
+	  sourceSets = [sourceSets.main]
+	  reportsDir = file("$project.buildDir/reports/findbugs")
+	  effort = "max"
+	}
+	
+	findbugsMain {
+	  reports {
+	    xml.enabled = false
+	    html.enabled = true
+	  }
+	}
+  
+    repositories {
+	    mavenCentral()	    
+		
+	    maven {
+	        url "https://github.com/aaberg/aaberg_mvn_repo/raw/master"
+	    }
+    }
+  
+   repositories {
+      mavenCentral()
+   }
+  
+  task listJars << {
+    configurations.compile.each { File file -> println file.name }
+  }
+  
+  dependencies {
+	  testCompile group: 'junit', name: 'junit', version: '4.+'
+	  
+	  //
+	  //  
+  }
+  
+}

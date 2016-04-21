@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<!-- 
 <Configure id="DSTest" class="org.eclipse.jetty.webapp.WebAppContext">
   <New class="org.eclipse.jetty.plus.jndi.Resource">
     <Arg></Arg>
-    <Arg>jdbc/askDS</Arg>
+    <Arg>jdbc/toltDS</Arg>
     <Arg>
       <New class="com.zaxxer.hikari.HikariDataSource">
          <Arg>
@@ -18,3 +19,4 @@
     </Arg>
   </New>
 </Configure>
+ -->
