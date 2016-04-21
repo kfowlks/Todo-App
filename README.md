@@ -1,8 +1,7 @@
 Simple Todo Application Stripes + Spring + Sql2o + HSQLDB 
 =================================================
 
-The intent of this project is demostrate a simple java stack that can be deployed and run locally using common tools. This application attempts to 
-show the simplistty of Java when used with moderen tools and frameworks. 
+The intent of this project is demonstrate a simple java stack that can be deployed and run locally using common tools. This application attempts to show the simplistic of Java when used with modern tools and frameworks.
 
 Gradle is use for the dependency managment
 
