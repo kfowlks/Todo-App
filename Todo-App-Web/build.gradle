@@ -67,8 +67,8 @@ repositories {
 dependencies {
 	
 	
-	compile project(':Todo-App-API') 
-	compile project(':Todo-App-Common') 
+	compile project(':Todo-App-API')
+	compile project(':Todo-App-Common')
 	
 	providedCompile 'javax.servlet:servlet-api:2.5'
 	providedCompile fileTree(dir: 'lib', includes: ['*.jar'])
@@ -97,8 +97,7 @@ dependencies {
     gretty 'com.zaxxer:HikariCP-java6:+'
     
     runtime "taglibs:standard:1.1.2","javax.servlet:jstl:1.1.2"    
-	providedRuntime "hsqldb:hsqldb:1.8.0.10"
-	
+    providedRuntime "hsqldb:hsqldb:1.8.0.10"
 }
 
 gretty {
@@ -106,7 +105,6 @@ gretty {
 }
 
 war {
-    baseName = 'totl'
+    baseName = buildwarname
     webXml   = file('deployment/totl/'+buildtype+'/war/WEB-INF/web.xml')
-    // classpath fileTree('lib/web')  adds a file-set to the WEB-INF/lib dir.     
 }
