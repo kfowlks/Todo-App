@@ -13,6 +13,3 @@ CREATE TABLE TodoTasks (
    CONSTRAINT TodoTasks_pk PRIMARY KEY (id)
 );
 
-
-
-

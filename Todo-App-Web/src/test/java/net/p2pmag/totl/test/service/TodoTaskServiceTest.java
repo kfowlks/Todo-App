@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@Configuration("c:\\home2\\totl\\app\\bin\\spring-test-config.xml")
+@Configuration("C:/home2/Todo-App/Todo-App-Web/deployment/totl/developer/war/WEB-INF/applicationContext.xml")
 public class TodoTaskServiceTest {
 	
 	@Before
