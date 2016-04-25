@@ -1,11 +1,9 @@
-package net.p2pmag.totl.dao;
+package com.gmail.fowlk1kd.dao;
 
 
 
 import java.sql.Timestamp;
 import java.util.List;
-
-import net.p2pmag.totl.domain.TodoTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import com.gmail.fowlk1kd.common.dao.GenericDAO;
+import com.gmail.fowlk1kd.domain.TodoTask;
 
 @Repository("TodoTaskDAO")
 public class TodoTaskDAOImpl extends GenericDAO<TodoTask, Integer> implements TodoTaskDAO {

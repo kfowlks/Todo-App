@@ -4,8 +4,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<description>Sample App</description>
-	<display-name>Sample Stripes+Spring</display-name>
+	<description>Todo Sample Application Spring+Stripes+Sql2o</description>
+	<display-name>Todo Sample Application</display-name>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -32,12 +32,12 @@
 
 		<init-param>
 			<param-name>ActionResolver.Packages</param-name>
-			<param-value>net.p2pmag.totl.web.controller</param-value>
+			<param-value>com.gmail.fowlk1kd.web.controller</param-value>
 		</init-param>
 
 		<init-param>
 			<param-name>Extension.Packages</param-name>
-			<param-value>net.p2pmag.totl.web.extension</param-value>
+			<param-value>com.gmail.fowlk1kd.web.extension</param-value>
 		</init-param>
 
 		<init-param>

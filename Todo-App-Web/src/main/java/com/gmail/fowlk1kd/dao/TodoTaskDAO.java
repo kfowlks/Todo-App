@@ -1,8 +1,9 @@
-package net.p2pmag.totl.dao;
+package com.gmail.fowlk1kd.dao;
 import java.sql.Timestamp;
 import java.util.List;
 
-import net.p2pmag.totl.domain.*;
+import com.gmail.fowlk1kd.common.dao.DAO;
+import com.gmail.fowlk1kd.domain.*;
 
 public interface TodoTaskDAO extends DAO<TodoTask, Integer> {	
 	public List<TodoTask> findAllCompletedTasks( );

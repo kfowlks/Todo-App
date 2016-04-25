@@ -7,7 +7,7 @@
  */
 
 
-package net.p2pmag.totl.web.common;
+package com.gmail.fowlk1kd.web.common;
 
 import java.io.Serializable;
 import java.util.ArrayList;

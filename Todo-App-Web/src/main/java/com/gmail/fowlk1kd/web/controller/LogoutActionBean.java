@@ -5,11 +5,10 @@
  * East Lansing, Michigan 48824, U.S.A.
  * All rights reserved.
  */
-package net.p2pmag.totl.web.controller;
+package com.gmail.fowlk1kd.web.controller;
 
 import javax.servlet.http.HttpSession;
 
-import net.p2pmag.totl.web.common.AbstractActionBean;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -18,11 +17,13 @@ import net.sourceforge.stripes.action.Resolution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.gmail.fowlk1kd.web.common.AbstractActionBean;
+
 
 /**
  * Logout Action Bean
  *
- * @author   <a href="mailto:fowlks@msu.edu">Kevin Fowlks</a>
+ * @author   <a href="mailto:fowlk1kd@gmail.com">Kevin Fowlks</a>
  * @version  1.0
  */
 public class LogoutActionBean extends AbstractActionBean implements ActionBean

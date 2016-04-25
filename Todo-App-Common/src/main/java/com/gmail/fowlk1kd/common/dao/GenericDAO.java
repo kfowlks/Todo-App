@@ -1,4 +1,4 @@
-package net.p2pmag.totl.dao;
+package com.gmail.fowlk1kd.common.dao;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;

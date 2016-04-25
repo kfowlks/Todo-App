@@ -71,7 +71,7 @@
 	</c:if>
 	</c:forEach>
 	
-	<stripes:form beanclass="net.p2pmag.totl.web.controller.DefaultActionBean" focus="task.description">
+	<stripes:form beanclass="com.gmail.fowlk1kd.web.controller.DefaultActionBean" focus="task.description">
 	<div class="row">
 	
 	
@@ -97,7 +97,7 @@
 				        	<c:choose>
 								<c:when test="${item.completed}">
 									<s>${item.description}</s>
-									<stripes:link  beanclass="net.p2pmag.totl.web.controller.DefaultActionBean" event="deleteTask" >
+									<stripes:link  beanclass="com.gmail.fowlk1kd.web.controller.DefaultActionBean" event="deleteTask" >
 				     				<stripes:param name="task.id">${item.id}</stripes:param>
      								<span class="glyphicon glyphicon-remove-sign"></span>
      								</stripes:link>

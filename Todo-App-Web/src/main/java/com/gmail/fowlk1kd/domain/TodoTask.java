@@ -1,4 +1,4 @@
-package net.p2pmag.totl.domain;
+package com.gmail.fowlk1kd.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

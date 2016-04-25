@@ -5,7 +5,7 @@
  * East Lansing, Michigan 48824, U.S.A.
  * All rights reserved.
  */
-package net.p2pmag.totl.web.controller;
+package com.gmail.fowlk1kd.web.controller;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -13,9 +13,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import net.p2pmag.totl.domain.TodoTask;
-import net.p2pmag.totl.services.TodoService;
-import net.p2pmag.totl.web.common.AbstractActionBean;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -28,6 +25,10 @@ import net.sourceforge.stripes.validation.SimpleError;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.gmail.fowlk1kd.domain.TodoTask;
+import com.gmail.fowlk1kd.services.TodoService;
+import com.gmail.fowlk1kd.web.common.AbstractActionBean;
 
 
 /**

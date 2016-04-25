@@ -1,15 +1,15 @@
-package net.p2pmag.totl.services;
+package com.gmail.fowlk1kd.services;
 
 import java.sql.Timestamp;
 import java.util.List;
-
-import net.p2pmag.totl.dao.TodoTaskDAO;
-import net.p2pmag.totl.domain.TodoTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.gmail.fowlk1kd.dao.TodoTaskDAO;
+import com.gmail.fowlk1kd.domain.TodoTask;
 
 @Service("TodoService")
 public class TodoServiceImpl implements TodoService {

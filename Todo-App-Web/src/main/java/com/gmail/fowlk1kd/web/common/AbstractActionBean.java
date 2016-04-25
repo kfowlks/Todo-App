@@ -5,7 +5,7 @@
  * East Lansing, Michigan 48824, U.S.A.
  * All rights reserved.
  */
-package net.p2pmag.totl.web.common;
+package com.gmail.fowlk1kd.web.common;
 
 import java.io.Serializable;
 

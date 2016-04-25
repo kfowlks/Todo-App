@@ -1,11 +1,4 @@
-/*
- * net.p2pmag.pollme net.p2pmag.pollme
- *
- * Copyright 2011 Michigan State University
- * East Lansing, Michigan 48824, U.S.A.
- * All rights reserved.
- */
-package net.p2pmag.totl.web.extension;
+package com.gmail.fowlk1kd.web.extension;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +19,7 @@ import net.sourceforge.stripes.controller.NameBasedActionResolver;
  * - all lower case with underscore separators
  * - without .action prefixes
  *
- * @author   <a href="mailto:fowlks@msu.edu">Kevin Fowlks</a>
+ * @author   <a href="mailto:fowlk1kd@gmail.com">Kevin Fowlks</a>
  * @version  1.0
  */
 public class ActionResolver extends NameBasedActionResolver

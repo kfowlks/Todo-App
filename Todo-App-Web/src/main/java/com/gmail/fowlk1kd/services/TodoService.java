@@ -1,8 +1,8 @@
-package net.p2pmag.totl.services;
+package com.gmail.fowlk1kd.services;
 
 import java.util.List;
 
-import net.p2pmag.totl.domain.TodoTask;
+import com.gmail.fowlk1kd.domain.TodoTask;
 
 public interface TodoService {
 

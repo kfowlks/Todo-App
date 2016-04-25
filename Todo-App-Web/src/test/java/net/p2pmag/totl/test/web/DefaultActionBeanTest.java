@@ -3,8 +3,9 @@ package net.p2pmag.totl.test.web;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.p2pmag.totl.domain.TodoTask;
-import net.p2pmag.totl.web.controller.DefaultActionBean;
+import com.gmail.fowlk1kd.domain.TodoTask;
+import com.gmail.fowlk1kd.web.controller.DefaultActionBean;
+
 import net.sourceforge.stripes.action.ActionBeanContext;
 
 public class DefaultActionBeanTest {

@@ -11,12 +11,12 @@
 
     <!-- enable component scanning and autowire (beware that this does not enable mapper scanning!) -->    
 	
-	<context:component-scan base-package="net.p2pmag.totl" > 
+	<context:component-scan base-package="com.gmail.fowlk1kd" > 
 		<context:include-filter type="regex" 
-                       expression="net.p2pmag.totl.dao.*DAO*" /> 
+                       expression="com.gmail.fowlk1kd.dao.*DAO*" /> 
 		<context:include-filter type="regex" 
-                       expression="net.p2pmag.totl.services.*Service*" />
-        <context:include-filter type="regex" expression="net.p2pmag.totl.test.*Test*" /> 
+                       expression="com.gmail.fowlk1kd.services.*Service*" />
+        <context:include-filter type="regex" expression="com.gmail.fowlk1kd.test.*Test*" /> 
 	</context:component-scan>
 		
 	<bean id="dataSource2" class="com.zaxxer.hikari.HikariDataSource">

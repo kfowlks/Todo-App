@@ -2,8 +2,6 @@ package net.p2pmag.totl.test.service;
 
 import java.util.List;
 
-import net.p2pmag.totl.domain.TodoTask;
-import net.p2pmag.totl.services.TodoService;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
 import org.junit.After;
@@ -14,6 +12,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.gmail.fowlk1kd.domain.TodoTask;
+import com.gmail.fowlk1kd.services.TodoService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Configuration("C:/home2/Todo-App/Todo-App-Web/deployment/totl/developer/war/WEB-INF/applicationContext.xml")
