@@ -7,7 +7,8 @@ import com.gmail.fowlk1kd.domain.TodoTask;
 public interface TodoService {
 
 	public void addTask( TodoTask task );	
-	public void updateTask( TodoTask task );
+	public void markTasksComplete( List<Integer> taskList );
+	public TodoTask updateTask( TodoTask task );
 	
 	public TodoTask getTask(Integer id);
 	public TodoTask getTask(String description);

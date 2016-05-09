@@ -1,4 +1,4 @@
-package net.p2pmag.totl.test.web;
+package com.gmail.fowlk1kd.test.web;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -112,12 +112,8 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     	
 		 if (this.task == null) 
 		 {
-		     getContext().getValidationErrors().addGlobalError( new SimpleError("You must enter a description for a task!") );
-		     
-		     //return new RedirectResolution( DefaultActionBean.class, "index");
-		     //return new ForwardResolution( "/WEB-INF/protected_jsps/default.jsp" );
-		     return new ForwardResolution( DefaultActionBean.class, "index" );
-		     
+		     getContext().getValidationErrors().addGlobalError( new SimpleError("You must enter a description for a task!") );		     
+		     return new ForwardResolution( DefaultActionBean.class, "index" );		     
 		 }
     	
     	todoService.addTask(task);

@@ -54,8 +54,11 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public void updateTask(TodoTask task) {
-		todoTaskDAO.update(task);		
+	public TodoTask updateTask(TodoTask task) {
+		 
+	  todoTaskDAO.update(task);
+		 
+		 return getTask( task.getId()); 
 	}
 
 	@Override
@@ -64,8 +67,26 @@ public class TodoServiceImpl implements TodoService {
 		task = todoTaskDAO.findByDescription(description);		
 		return task;	
 	}
-	
-	
+
+    @Override
+    public void markTasksComplete(List<Integer> taskList) {
+            
+      Timestamp tsCompleteTime  = new Timestamp( System.currentTimeMillis());
+      
+      for( Integer id: taskList )         
+      {
+        if (id != null) 
+        { 
+          TodoTask task = todoTaskDAO.findById(id);
+          
+          if ( !task.isCompleted() ) 
+          {         
+            task.setCompletedon( tsCompleteTime );                  
+            updateTask( task );
+          }
+        }
+      }      
+    }
 	
 
 }

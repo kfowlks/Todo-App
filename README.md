@@ -1,9 +1,9 @@
-Simple Todo Application Stripes + Spring + Sql2o + HSQLDB 
+Simple Todo-App Application (Stripes + Spring + Sql2o + HSQLDB) 
 =================================================
 
-The intent of this project is demonstrate a simple java stack that can be deployed and run locally using common tools. This application attempts to show the simplistic of Java when used with modern tools and frameworks.
+The intent of this project is demonstrate a simple java stack that can be deployed and run locally using common tools. This application attempts to show the simplistic nature of Java when used with modern tools/framework.
 
-Gradle is use for the dependency managment
+Gradle is use for the dependency management
 
 >*** Important ***
 > You also need JDK 1.7
@@ -56,16 +56,17 @@ java -cp lib/hsqldb.jar org.hsqldb.util.DatabaseManagerSwing
 ```
 
 Execute SQL Scripts in the below folder
+```bash
 C:\home2\Todo-App\Todo-App-Web\src\main\resources\db\migration
 
 V1_0__initial_load.sql
+```
 
 Updated the path of the database by editing the applicationContext.xml found in the below directory
-
+```bash
 C:\home2\Todo-App\Todo-App-Web\src\main\webapp\WEB-INF
-
-
 
 
 gradle Todo-App-Web:run
  
+```
