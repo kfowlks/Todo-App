@@ -72,13 +72,15 @@ dependencies {
 	
 	providedCompile 'javax.servlet:servlet-api:2.5'
 	providedCompile fileTree(dir: 'lib', includes: ['*.jar'])
+
+	compile 'org.hsqldb:hsqldb:2.3.3'
+	compile 'org.sql2o:sql2o:1.5.+'
 	
 	compile 'org.eclipse.jetty:jetty-parent:9'
-	compile 'org.sql2o:sql2o:1.5.+'
 	compile 'net.sourceforge.stripes:stripes:1.5.8'
     compile 'org.slf4j:slf4j-api:1.6.1'
     compile 'org.slf4j:slf4j-log4j12:1.6.1'
-    compile 'org.hsqldb:hsqldb:2.3.3'
+    
     compile 'org.springframework:spring-web:4.1.2.RELEASE'
     compile 'org.springframework:spring-jdbc:4.1.2.RELEASE'
     compile 'org.springframework:spring-test:4.1.2.RELEASE'
@@ -86,26 +88,21 @@ dependencies {
 	
     /* Web UI components */    
     compile 'org.webjars:x-editable-bootstrap3:1.5.1'
-    compile 'org.webjars.bower:bootstrap:3.3.4'
-    
+    compile 'org.webjars.bower:bootstrap:3.3.4'    
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
         
-    testCompile("org.hsqldb:hsqldb:2.3.3")
+    testCompile("org.hsqldb:hsqldb:+")
     testCompile("com.zaxxer:HikariCP-java6:+")
-    
     testCompile group: 'org.testng', name: 'testng', version: '6.8.8'
     
     // The below lines are needed to add the specified lib(s) to the gretty container runtime class path
     gretty 'org.hsqldb:hsqldb:2.3.3'
     gretty 'com.zaxxer:HikariCP-java6:+'
-    
-    testRuntime "hsqldb:hsqldb:+"
+
     testRuntime 'com.zaxxer:HikariCP-java6:+'
-    testRuntime "org.hsqldb:hsqldb:2.3.3"
-    testRuntime 'org.springframework:spring-test:4.1.2.RELEASE'
-    testRuntime 'org.sql2o:sql2o:1.5.+'
+    testRuntime "org.hsqldb:hsqldb:+"
+    
     runtime "taglibs:standard:1.1.2","javax.servlet:jstl:1.1.2"    
-    providedRuntime "hsqldb:hsqldb:+"
 }
 
 gretty {
