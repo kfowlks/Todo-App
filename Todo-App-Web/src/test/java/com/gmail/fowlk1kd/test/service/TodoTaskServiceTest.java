@@ -9,8 +9,7 @@ import org.testng.Assert.*;
 import com.gmail.fowlk1kd.domain.TodoTask;
 import com.gmail.fowlk1kd.services.TodoService;
 
-
-@ContextConfiguration(locations = {"file:src/test/resources/applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class TodoTaskServiceTest extends AbstractTestNGSpringContextTests {
 
 
