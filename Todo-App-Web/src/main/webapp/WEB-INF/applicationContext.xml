@@ -11,6 +11,10 @@
 	<!-- enable component scanning and autowire (beware that this does not enable 
 		mapper scanning!) -->
 
+
+    <!-- load H2 jdbc properties -->
+    <context:property-placeholder location="classpath:jdbc-h2.properties"/>
+
 	<context:component-scan base-package="com.gmail.fowlk1kd">
 		<!-- <context:include-filter type="regex" expression="com.gmail.fowlk1kd.dao.*DAO*" 
 			/> <context:include-filter type="regex" expression="com.gmail.fowlk1kd.services.*Service*" 
@@ -25,20 +29,26 @@
 			<bean class="com.zaxxer.hikari.HikariConfig">
 				<constructor-arg>
 					<props>
-						<prop key="dataSource.url">jdbc:hsqldb:mem:totl</prop>
-						<prop key="dataSource.user">sa</prop>
-						<prop key="dataSource.password" />
+						<prop key="dataSource.url">${jdbc.url}</prop>
+						<prop key="dataSource.user">${jdbc.user}</prop>
+						<prop key="dataSource.password" >${jdbc.password}</prop>
 					</props>
 				</constructor-arg>
-				<property name="dataSourceClassName" value="org.hsqldb.jdbc.JDBCDataSource" />
+				<property name="dataSourceClassName" value="org.h2.jdbcx.JdbcDataSource" />
 			</bean>
 		</constructor-arg>
 	</bean>
 
+	<jdbc:initialize-database data-source="dataSource2">
+        <jdbc:script location="classpath:db/migration/V1_0__initial_load.sql"/>
+        <!-- <jdbc:script location="classpath:test-data.sql"/> -->
+    </jdbc:initialize-database>
+    <!-- 
 	<jdbc:embedded-database id="dataSource2" type="HSQL">
 		<jdbc:script location="classpath:db/migration/V1_0__initial_load.sql" />
 	</jdbc:embedded-database>
-
+ -->
+ 
 	<bean id="sql2o" class="org.sql2o.Sql2o">
 		<constructor-arg type='javax.sql.DataSource' ref='dataSource2' />
 	</bean>
