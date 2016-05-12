@@ -47,7 +47,7 @@
 	<jdbc:embedded-database id="dataSource2" type="HSQL">
 		<jdbc:script location="classpath:db/migration/V1_0__initial_load.sql" />
 	</jdbc:embedded-database>
- -->
+ 	-->
  
 	<bean id="sql2o" class="org.sql2o.Sql2o">
 		<constructor-arg type='javax.sql.DataSource' ref='dataSource2' />
