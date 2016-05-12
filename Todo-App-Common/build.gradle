@@ -17,4 +17,5 @@ dependencies {
       compile project(':Todo-App-API')
       //compile fileTree(dir: 'lib', includes: ['*.jar'])
       compile 'log4j:log4j:1.2.8'
+      compile group: 'org.testng', name: 'testng', version: '6.8.8'
 }

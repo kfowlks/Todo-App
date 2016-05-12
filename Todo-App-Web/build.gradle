@@ -73,7 +73,7 @@ dependencies {
 	providedCompile 'javax.servlet:servlet-api:2.5'
 	providedCompile fileTree(dir: 'lib', includes: ['*.jar'])
 
-	compile 'org.hsqldb:hsqldb:2.3.3'
+	compile 'com.h2database:h2:1.4+'
 	compile 'org.sql2o:sql2o:1.5.+'
 	
 	compile 'org.eclipse.jetty:jetty-parent:9'
@@ -91,16 +91,16 @@ dependencies {
     compile 'org.webjars.bower:bootstrap:3.3.4'    
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
         
-    testCompile("org.hsqldb:hsqldb:+")
+    testCompile('com.h2database:h2:1.4+')
     testCompile("com.zaxxer:HikariCP-java6:+")
     testCompile group: 'org.testng', name: 'testng', version: '6.8.8'
     
     // The below lines are needed to add the specified lib(s) to the gretty container runtime class path
-    gretty 'org.hsqldb:hsqldb:2.3.3'
+    gretty 'com.h2database:h2:1.4+'
     gretty 'com.zaxxer:HikariCP-java6:+'
 
     testRuntime 'com.zaxxer:HikariCP-java6:+'
-    testRuntime "org.hsqldb:hsqldb:+"
+    testRuntime 'com.h2database:h2:1.4+'
     
     runtime "taglibs:standard:1.1.2","javax.servlet:jstl:1.1.2"    
 }

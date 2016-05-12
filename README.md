@@ -1,4 +1,4 @@
-Simple Todo-App Application (Stripes + Spring + Sql2o + HSQLDB) 
+Simple Todo-App Application (Stripes + Spring + Sql2o + H2) 
 =================================================
 
 The intent of this project is demonstrate a simple java stack that can be deployed and run locally using common tools. This application attempts to show the simplistic nature of Java when used with modern tools/framework.
@@ -9,10 +9,9 @@ Gradle is use for the dependency management
 > You also need JDK 1.7
 * * *
 
-
 ### Reference
 
-* View App URL  [https://localhost:10101/Todo-App]
+* [View Application]: http://localhost:10101/Todo-App
 
 ### Version
 1.0
@@ -22,7 +21,7 @@ Gradle is use for the dependency management
 * [Gradle]          - Build Manager
 * [Jetty]           - Jetty 9
 * [Bootstrap]       - BootStrap via WebJar's
-* [HSQLDB]          - Database
+* [H2]      	    - In Memory Database
 * [Sql2o]           - Persistence Layer 
 * [Spring]          - Dependency Injection
 
@@ -40,33 +39,14 @@ The artifacts should be now available at the below location
 
 /home2/Todo-App/[sub-project name]/build/libs
 
-Run the below web app by executing the below
+Run the below web application by executing the below
 ```bash
 
 gradle Todo-App-Web:run
 ```
 
-### Create Database HSQLDB
+Run the below tests by executing the below
 ```bash
 
-cd /home2/Todo-App
-
-java -cp lib/hsqldb.jar org.hsqldb.util.DatabaseManagerSwing
-
-```
-
-Execute SQL Scripts in the below folder
-```bash
-C:\home2\Todo-App\Todo-App-Web\src\main\resources\db\migration
-
-V1_0__initial_load.sql
-```
-
-Updated the path of the database by editing the applicationContext.xml found in the below directory
-```bash
-C:\home2\Todo-App\Todo-App-Web\src\main\webapp\WEB-INF
-
-
-gradle Todo-App-Web:run
- 
+gradle Todo-App-Web:test
 ```
