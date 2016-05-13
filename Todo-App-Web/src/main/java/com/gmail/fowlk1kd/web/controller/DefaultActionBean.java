@@ -25,6 +25,7 @@ import net.sourceforge.stripes.validation.SimpleError;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gmail.fowlk1kd.domain.TodoTask;
 import com.gmail.fowlk1kd.services.TodoService;
@@ -105,8 +106,8 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     
     public Resolution addTask()
     {
-    	HttpServletRequest    request = this.getContext().getRequest();
-    	HttpSession           session = request.getSession(false);
+    	//HttpServletRequest    request = this.getContext().getRequest();
+    	//HttpSession           session = request.getSession(false);
     	
     	logger.info( "In Event {} ", this.getContext().getEventName());
     	

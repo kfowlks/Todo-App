@@ -4,6 +4,7 @@
   <test name="Test">
     <classes>
       <class name="com.gmail.fowlk1kd.test.service.TodoTaskServiceTest"/>
+      <class name="com.gmail.fowlk1kd.test.web.DefaultActionBeanTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
