@@ -1,4 +1,5 @@
-Simple Todo-App Application (Stripes + Spring + Sql2o + H2) 
+Simple Todo-App Application (Stripes + Spring + Sql2o + H2) https://travis-ci.org/kfowlks/Todo-App.svg?branch=kfowlks-travis-ci
+[![Build Status](https://travis-ci.org/kfowlks/Todo-App.svg?branch=kfowlks-travis-ci)]
 =================================================
 
 The intent of this project is demonstrate a simple java stack that can be deployed and run locally using common tools. This application attempts to show the simplistic nature of Java when used with modern tools/framework.
