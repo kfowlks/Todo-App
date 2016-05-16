@@ -1,7 +1,7 @@
-Simple Todo-App Application (Stripes + Spring + Sql2o + H2) 
+Simple Todo-App Application (Stripes + Spring + Sql2o + H2)
 =================================================
 
-The intent of this project is demonstrate a simple java stack that can be deployed and run locally using common tools. This application attempts to show the simplistic nature of Java when used with modern tools/framework.
+The intent of this project is demonstrate a simple java stack that can be deployed and run locally using common tools. This application attempts to show the simplistic nature of Java when used with modern tools/framework
 
 Gradle is use for the dependency management
 
@@ -50,3 +50,5 @@ Run the below tests by executing the below
 
 gradle Todo-App-Web:test
 ```
+
+[![Travis build status](https://travis-ci.org/kfowlks/Todo-App.svg?branch=master)](https://travis-ci.org/kfowlks)
