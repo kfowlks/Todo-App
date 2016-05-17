@@ -11,7 +11,7 @@ Gradle is use for the dependency management
 
 ### Reference
 
-* [View Application]: http://localhost:10101/Todo-App
+* [View Application]: [http://localhost:10101/Todo-App]
 
 ### Version
 1.0
@@ -37,15 +37,19 @@ Gradle is use for the dependency management
 ```
 The artifacts should be now available at the below location
 
+```bash
 /home2/Todo-App/[sub-project name]/build/libs
+```
 
 Run the below web application by executing the below
+
 ```bash
 
-gradle Todo-App-Web:run
+gradle Todo-App-Web:run -Pbuildtype=<Enviroment name i.e. developer>
 ```
 
 Run the below tests by executing the below
+
 ```bash
 
 gradle Todo-App-Web:test
