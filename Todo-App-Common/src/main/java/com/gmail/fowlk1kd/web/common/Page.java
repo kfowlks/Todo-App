@@ -1,12 +1,3 @@
-/*
- * AIS-Common - JPA Common Code
- *
- * Copyright 2009 Michigan State University
- * East Lansing, Michigan 48824, U.S.A.
- * All rights reserved.
- */
-
-
 package com.gmail.fowlk1kd.web.common;
 
 import java.io.Serializable;
@@ -15,11 +6,11 @@ import java.util.List;
 
 
 /**
- * This class is used as a data container for storing sub-selections of a larger query from the service layer 
- * to the web tier.
+ * This class is used as a data container for storing sub-selections of a larger query from the service layer
+ * and passing it to the controller.
  *  
  * @author  <a href="mailto:fowlks@ais.msu.edu">Kevin Fowlks</a> 
- * @created August, 2009
+ * @created May 01, 2016
  * @version 1.0
  *
  */
@@ -43,15 +34,7 @@ public class Page implements Serializable
 		this.pageSize = MAX_PAGE_SIZE;
 		results = new ArrayList<Object>(MAX_PAGE_SIZE);
 	}
-/*
-	public Page(Query query, int page, int pageSize) {
-		this.page = page;
-		this.pageSize = pageSize;
 
-		results = query.setFirstResult(page * pageSize).setMaxResults(
-				pageSize + 1).getResultList();
-	}
-*/
 	public boolean isNextPage() {
 		return results.size() > pageSize;
 	}
