@@ -1,0 +1,9 @@
+{
+  "realm": "Demo-Realm",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3qcsRDPt0TOUA0DOmMrk0F2dbhlxBrdEBxxOpadrA/Dc1cxZSH9E5aOBHi3GLGlZdWcP32SQ7PdcsbMvWnTnq7CN9wJG07/XdvRB7/zW2uHO3QdqYWZ2OdK51zFFd9WaTfzUFggNnvAfMWSRd1STFD4L6zeuwQyVg0elj7URaRT4k8S1oXIebc+TUkRG+DH6NkDYiyCs6FVaK7tOg15cChi7gJolDo4GBIfDRBwJr/BTqJVxjUIsaval22Dmk2avj9jCpsfiwAeY7aQfmv6kTTMAzlNC7jjXVUEjWGBJ1RbeDWXjTX35erpLYZUWh2JxMAsDGtrLOpMLtooVqobeMQIDAQAB",
+  "auth-server-url": "http://localhost:8080/auth",
+  "ssl-required": "external",
+  "resource": "Todo-App-Web",
+  "public-client": true,
+  "use-resource-role-mappings": true
+}
