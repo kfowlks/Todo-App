@@ -1,27 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="
-     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
-     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
-     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-v.xsd">
-
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"       
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/jdbc 
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 	<!-- enable component scanning and autowire (beware that this does not enable 
 		mapper scanning!) -->
-
 
     <!-- load H2 jdbc properties -->
     <context:property-placeholder location="classpath:jdbc-h2.properties"/>
 
-	<context:component-scan base-package="com.gmail.fowlk1kd">
-		<!-- <context:include-filter type="regex" expression="com.gmail.fowlk1kd.dao.*DAO*" 
-			/> <context:include-filter type="regex" expression="com.gmail.fowlk1kd.services.*Service*" 
-			/> <context:include-filter type="regex" expression="com.gmail.fowlk1kd.test.services.*Test*" 
-			/> <context:include-filter type="regex" expression="com.gmail.fowlk1kd.test.web.*Test*" 
-			/> -->
-	</context:component-scan>
+	<context:component-scan base-package="org.keycloak.adapters.springsecurity, com.gmail.fowlk1kd" />
+
+    <security:http auto-config="false" entry-point-ref="keycloakAuthenticationEntryPoint">
+        <security:custom-filter ref="keycloakPreAuthActionsFilter" before="LOGOUT_FILTER" />
+        <security:custom-filter ref="keycloakAuthenticationProcessingFilter" before="FORM_LOGIN_FILTER" />
+        <security:intercept-url pattern="/customers**" access="ROLE_USER" />
+        <security:intercept-url pattern="/admin**" access="ROLE_ADMIN" />
+        <security:custom-filter ref="logoutFilter" position="LOGOUT_FILTER" />
+    </security:http>
+
+	<security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="keycloakAuthenticationProvider" />
+    </security:authentication-manager>
+
+
+    <bean id="adapterDeploymentContext" class="org.keycloak.adapters.springsecurity.AdapterDeploymentContextFactoryBean">
+        <constructor-arg value="/WEB-INF/keycloak.json" />
+    </bean>
+
+    <bean id="keycloakAuthenticationEntryPoint" class="org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationEntryPoint" />
+    <bean id="keycloakAuthenticationProvider" class="org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider" />
+    <bean id="keycloakPreAuthActionsFilter" class="org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter" />
+    <bean id="keycloakAuthenticationProcessingFilter" class="org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter">
+        <constructor-arg name="authenticationManager" ref="authenticationManager" />
+    </bean>
+
+    <bean id="keycloakLogoutHandler" class="org.keycloak.adapters.springsecurity.authentication.KeycloakLogoutHandler">
+        <constructor-arg ref="adapterDeploymentContext" />
+    </bean>
+
+    <bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <constructor-arg name="logoutSuccessUrl" value="/" />
+        <constructor-arg name="handlers">
+            <list>
+                <ref bean="keycloakLogoutHandler" />
+                <bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+            </list>
+        </constructor-arg>
+        <property name="logoutRequestMatcher">
+            <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                <constructor-arg name="pattern" value="/sso/logout**" />
+                <constructor-arg name="httpMethod" value="GET" />
+            </bean>
+        </property>
+    </bean>
+
 
 	<bean id="dataSource2" class="com.zaxxer.hikari.HikariDataSource">
 
@@ -52,5 +95,7 @@
 	<bean id="sql2o" class="org.sql2o.Sql2o">
 		<constructor-arg type='javax.sql.DataSource' ref='dataSource2' />
 	</bean>
+
+
 
 </beans>

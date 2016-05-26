@@ -52,8 +52,13 @@ task('wrapper', type: Wrapper) {
   gradleVersion = '2.2.1'
 }
 
-configurations {
+configurations.all {
    println 'Building Project Type ' + buildtype
+   resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+		if (details.requested.group == 'org.springframework') {
+			details.useVersion '4.2.5.RELEASE'
+		}
+	}
 }
 
 repositories {
@@ -81,11 +86,13 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.6.1'
     compile 'org.slf4j:slf4j-log4j12:1.6.1'
     
-    compile 'org.springframework:spring-web:4.1.2.RELEASE'
-    compile 'org.springframework:spring-jdbc:4.1.2.RELEASE'
-    compile 'org.springframework:spring-test:4.1.2.RELEASE'
+    compile group: 'org.keycloak', name: 'keycloak-spring-security-adapter', version: '1.9.4.Final'
+    compile 'org.springframework:spring-web:$spring_version'
+    compile 'org.springframework:spring-jdbc:$spring_version'
+    compile 'org.springframework:spring-test:$spring_version'
+    compile 'org.springframework.security:spring-security-web:4.1+'
 	compile 'org.testng:testng:6.8.8'
-	
+	compile group: 'org.jboss.logging', name: 'jboss-logging', version: '3.3.0.Final'
     /* Web UI components */    
     compile 'org.webjars:x-editable-bootstrap3:1.5.1'
     compile 'org.webjars.bower:bootstrap:3.3.4'    
@@ -98,15 +105,26 @@ dependencies {
     // The below lines are needed to add the specified lib(s) to the gretty container runtime class path
     gretty 'com.h2database:h2:1.4+'
     gretty 'com.zaxxer:HikariCP-java6:+'
-
+    // gretty 'org.keycloak:keycloak-jetty92-adapter-dist:+'
+    // gretty 'org.keycloak:keycloak-jetty92-adapter:1.9.4.Final'
+	
     testRuntime 'com.zaxxer:HikariCP-java6:+'
     testRuntime 'com.h2database:h2:1.4+'
     
-    runtime "taglibs:standard:1.1.2","javax.servlet:jstl:1.1.2"    
+    runtime "taglibs:standard:1.1.2","javax.servlet:jstl:1.1.2"
+    
+    // Keycloak
+    // compile 'org.keycloak:keycloak-jetty92-adapter:1.9.4.Final'
+    // http://mvnrepository.com/artifact/org.keycloak/keycloak-adapter-spi
+
 }
 
 gretty {
-  port = 10101
+  //port = 10101
+  //jvmArg ['--add-to-startd=keycloak']
+  httpPort = 10101
+  servicePort = 19090
+  statusPort = 19091
 }
 
 
