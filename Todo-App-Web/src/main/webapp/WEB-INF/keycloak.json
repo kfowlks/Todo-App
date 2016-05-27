@@ -4,6 +4,8 @@
   "auth-server-url": "http://localhost:8080/auth",
   "ssl-required": "external",
   "resource": "Todo-App-Web",
-  "public-client": true,
+  "credentials": {
+    "secret": "5c6c8ada-a597-446b-b6ab-02aba0808e29"
+  },
   "use-resource-role-mappings": true
 }

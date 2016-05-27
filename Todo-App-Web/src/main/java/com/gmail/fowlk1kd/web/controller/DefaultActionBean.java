@@ -23,9 +23,13 @@ import net.sourceforge.stripes.action.SimpleMessage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.SimpleError;
 
+import org.keycloak.KeycloakPrincipal;
+import org.keycloak.KeycloakSecurityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.gmail.fowlk1kd.domain.TodoTask;
 import com.gmail.fowlk1kd.services.TodoService;
@@ -89,6 +93,14 @@ public class DefaultActionBean extends AbstractActionBean implements ActionBean
     {
     	HttpServletRequest    request = this.getContext().getRequest();
     	HttpSession           session = request.getSession(false);
+
+    	KeycloakPrincipal kp = ((KeycloakPrincipal)request.getUserPrincipal());
+    	KeycloakSecurityContext ksession = (KeycloakSecurityContext)request.getAttribute(KeycloakSecurityContext.class.getName());
+    	
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	if( ksession != null )logger.info("ksession", ksession.getIdToken());
+    	
+    	if( kp != null )logger.info("kp", kp.getName());
     	
     	logger.debug( "In Event {} ", this.getContext().getEventName());
     	

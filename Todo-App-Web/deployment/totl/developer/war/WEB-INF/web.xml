@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+      version="3.0">
 
 	<description>Todo Sample Application Spring+Stripes+Sql2o</description>
 	<display-name>Todo Sample Application</display-name>
@@ -40,6 +41,7 @@
 			<param-value>com.gmail.fowlk1kd.web.extension</param-value>
 		</init-param>
 
+
 		<init-param>
 			<param-name>Stripes.EncryptionKey</param-name>
 			<param-value>ASD#$DASDASD#$SDASD#SDSDddddFFFGGGHZZZ</param-value>
@@ -73,7 +75,20 @@
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
+	
+	<module-name>Todo-App-Web</module-name>
 
+    <filter>
+        <filter-name>Keycloak Filter</filter-name>
+        <filter-class>org.keycloak.adapters.servlet.KeycloakOIDCFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Keycloak Filter</filter-name>
+        <url-pattern>/keycloak/*</url-pattern>
+        <url-pattern>/default</url-pattern>
+    </filter-mapping>
+	
+	
 	<!-- Default Page -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -88,5 +103,6 @@
 		<error-code>500</error-code>
 		<location>/500.html</location>
 	</error-page>
+
 
 </web-app>

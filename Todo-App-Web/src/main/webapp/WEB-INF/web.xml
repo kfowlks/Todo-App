@@ -76,6 +76,19 @@
 		<dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
 	
+	<module-name>Todo-App-Web</module-name>
+
+    <filter>
+        <filter-name>Keycloak Filter</filter-name>
+        <filter-class>org.keycloak.adapters.servlet.KeycloakOIDCFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Keycloak Filter</filter-name>
+        <url-pattern>/keycloak/*</url-pattern>
+        <url-pattern>/default</url-pattern>
+    </filter-mapping>
+	
+	
 	<!-- Default Page -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

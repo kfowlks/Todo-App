@@ -86,7 +86,8 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.6.1'
     compile 'org.slf4j:slf4j-log4j12:1.6.1'
     
-    compile group: 'org.keycloak', name: 'keycloak-spring-security-adapter', version: '1.9.4.Final'
+    //compile group: 'org.keycloak', name: 'keycloak-spring-security-adapter', version: '1.9.4.Final'
+    compile 'org.keycloak:keycloak-servlet-filter-adapter:1.9.4.Final'
     compile 'org.springframework:spring-web:$spring_version'
     compile 'org.springframework:spring-jdbc:$spring_version'
     compile 'org.springframework:spring-test:$spring_version'
@@ -105,6 +106,8 @@ dependencies {
     // The below lines are needed to add the specified lib(s) to the gretty container runtime class path
     gretty 'com.h2database:h2:1.4+'
     gretty 'com.zaxxer:HikariCP-java6:+'
+    
+    
     // gretty 'org.keycloak:keycloak-jetty92-adapter-dist:+'
     // gretty 'org.keycloak:keycloak-jetty92-adapter:1.9.4.Final'
 	
