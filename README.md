@@ -11,7 +11,7 @@ Gradle is use for the dependency management
 
 ### Reference
 
-* [View Application]: [http://localhost:10101/Todo-App]
+[View Application Locally](http://localhost:10101/Todo-App)
 
 ### Version
 1.0
